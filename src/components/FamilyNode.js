@@ -3,9 +3,9 @@ import './FamilyNodeStyle.css';
 
 const FamilyNode = ({ node, style, isRoot }) => {
   return (
-    <div className="root" style={style}>
+    <div className="root text-primaryGreen" style={style}>
       <div className="inner">
-        <p>{isRoot ? 'Root' : ''}</p>
+        <p className="">{isRoot ? 'Root' : ''}</p>
       </div>
     </div>
   );
