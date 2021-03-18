@@ -3,10 +3,14 @@ import './FamilyNodeStyle.css';
 
 const FamilyNode = ({ node, style, isRoot }) => {
   return (
-    <div className="root text-primaryGreen" style={style}>
-      <div className="inner">
-        <p className="">{isRoot ? 'Root' : ''}</p>
-      </div>
+    <div className="absolute flex flex-col p-2" style={style}>
+      <article
+        className={`flex-col flex-1 border-current rounded-md bg-cardYellow ${
+          isRoot ? 'border-2' : ''
+        }`}
+      >
+        <p>{node.id}</p>
+      </article>
     </div>
   );
 };

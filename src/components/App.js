@@ -6,11 +6,12 @@ import nodesTree from './Nodes';
 const App = () => {
   const [nodes, setNodes] = useState(nodesTree);
   const rootId = 'HkqEDLvxE';
-  const WIDTH = 100;
-  const HEIGHT = 120;
+  const WIDTH = 350;
+  const HEIGHT = 400;
   return (
-    <div className="container">
+    <div className="container text-neutralDarkBrown bg-backgroundWhite min-w-full min-h-full">
       <ReactFamilyTree
+        color="#3a6351"
         nodes={nodes}
         rootId={rootId}
         width={WIDTH}

@@ -19,6 +19,9 @@ module.exports = {
         backgroundWhite: {
           DEFAULT: '#fcfbf7',
         },
+        cardYellow: {
+          DEFAULT: '#ffe7d4',
+        },
       },
       fontFamily: {
         cursive: ['Overlock, cursive'],
