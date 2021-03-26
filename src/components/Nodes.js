@@ -1,55 +1,71 @@
 const nodesTree = [
   {
-    id: 'dyTpfj6sr',
-    merke: '0612',
-    kind: 'Dvergvedder',
-    birthday: '12 Mai 2008',
+    id: 'HkqEDLvxE',
+    earmark: '0612',
+    regNr: '221112',
     gender: 'male',
-    spouses: [],
+    birthday: '05.05.2008',
+    race: 'dvergvedder',
+    color: 'viltgrå',
+    parents: [
+      {
+        id: '011jVS4rb',
+        type: 'blood',
+      },
+      {
+        id: 'PXACjDxmR',
+        type: 'blood',
+      },
+    ],
     siblings: [],
+    spouses: [],
+    children: [],
+  },
+  {
+    id: '011jVS4rb',
+    earmark: '0612',
+    regNr: '221112',
+    gender: 'male',
+    birthday: '05.05.2008',
+    race: 'dvergvedder',
+    color: 'viltgrå',
     parents: [],
+    siblings: [],
+    spouses: [
+      {
+        id: 'PXACjDxmR',
+        type: 'married',
+      },
+    ],
     children: [
       {
-        id: 'ahfR5lR2s',
-        type: 'blood',
-      },
-      {
-        id: 'aoF9dn5Ew',
+        id: 'HkqEDLvxE',
         type: 'blood',
       },
     ],
   },
   {
-    id: 'ahfR5lR2s',
-    merke: '24.3.95',
-    kind: 'Dvergvedder',
-    birthday: '12 Mai 2009',
-    gender: 'female',
-    spouses: [],
-    siblings: [],
-    parents: [
-      {
-        id: 'dyTpfj6sr',
-        type: 'blood',
-      },
-    ],
-    children: [],
-  },
-  {
-    id: 'aoF9dn5Ew',
+    id: 'PXACjDxmR',
+    earmark: '0612',
+    regNr: '221112',
     gender: 'male',
-    merke: '01222',
-    kind: 'Dvergvedder',
-    birthday: '30 Mai 2009',
-    spouses: [],
+    birthday: '05.05.2008',
+    race: 'dvergvedder',
+    color: 'viltgrå',
+    parents: [],
     siblings: [],
-    parents: [
+    spouses: [
       {
-        id: 'dyTpfj6sr',
+        id: 'PXACjDxmR',
+        type: 'married',
+      },
+    ],
+    children: [
+      {
+        id: 'HkqEDLvxE',
         type: 'blood',
       },
     ],
-    children: [],
   },
 ];
 
