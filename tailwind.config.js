@@ -26,6 +26,15 @@ module.exports = {
       fontFamily: {
         cursive: ['Overlock, cursive'],
       },
+      borderRadius: {
+        logoTopLeft: '1.1rem',
+        logoBottomRight: '1.1rem',
+        logoTopRight: '2px',
+        logoBottomLeft: '2px',
+      },
+      boxShadow: {
+        //logoShadow: '0 0 0 10px'
+      },
     },
   },
   variants: {
