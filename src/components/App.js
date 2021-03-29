@@ -1,6 +1,6 @@
 import React from 'react';
 import FamilyTree from './FamilyTree';
-import Navbar from './Navbar';
+import Navbar from './navbar/Navbar';
 import nodeTree from './Nodes';
 
 const App = () => {
