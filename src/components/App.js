@@ -1,6 +1,7 @@
 import React from 'react';
 import FamilyTree from './FamilyTree';
 import Navbar from './navbar/Navbar';
+import SideMenu from './SideMenu';
 import nodeTree from './Nodes';
 
 const App = () => {
@@ -10,9 +11,10 @@ const App = () => {
       <FamilyTree
         rootId="HkqEDLvxE"
         nodes={nodeTree}
-        WIDTH={200} //dimensions of one element
+        WIDTH={200} //dimensions of node one element
         HEIGHT={150}
       />
+      <SideMenu />
     </div>
   );
 };

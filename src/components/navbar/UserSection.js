@@ -14,6 +14,7 @@ const UserSection = ({ onClick }) => {
       className="ml-auto flex items-center space-x-1 cursor-pointer group focus:bg-primaryGreen"
       onClick={handleClick}
     >
+      <p className="mr-1 text-neutralDarkBrown opacity-70">Hallo, Meister!</p>
       <img
         className="w-8 rounded-full shadow-lg border-2 border-primaryGreen"
         src={profilePic}

@@ -34,6 +34,7 @@ module.exports = {
       },
       boxShadow: {
         logoShadow: '0 0 7px rgba(0, 0, 0, 0.16)',
+        sideMenuShadow: '0 0 15px rgba(0, 0, 0, 0.16)',
       },
     },
   },
