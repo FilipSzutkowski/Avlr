@@ -4,7 +4,7 @@ import FamilyNode from './FamilyNode';
 
 const FamilyTree = ({ rootId, nodes, WIDTH, HEIGHT }) => {
   return (
-    <div className="relative">
+    <article className="relative overflow-auto z-10">
       <ReactFamilyTree
         color="#3a6351"
         nodes={nodes}
@@ -26,7 +26,7 @@ const FamilyTree = ({ rootId, nodes, WIDTH, HEIGHT }) => {
           />
         )}
       />
-    </div>
+    </article>
   );
 };
 

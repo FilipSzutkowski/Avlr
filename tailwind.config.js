@@ -27,13 +27,13 @@ module.exports = {
         cursive: ['Overlock, cursive'],
       },
       borderRadius: {
-        logoTopLeft: '1.1rem',
-        logoBottomRight: '1.1rem',
+        logoTopLeft: '1.15rem',
+        logoBottomRight: '1.15rem',
         logoTopRight: '2px',
         logoBottomLeft: '2px',
       },
       boxShadow: {
-        //logoShadow: '0 0 0 10px'
+        logoShadow: '0 0 7px rgba(0, 0, 0, 0.16)',
       },
     },
   },
