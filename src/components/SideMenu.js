@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import FullMenu from './FullMenu';
 import IndividualDetails from './IndividualDetails';
+import Button from './utilities/Button';
 import { IoChevronBackCircle } from 'react-icons/io5';
 
 const SideMenu = ({ nodes, rootId }) => {
@@ -14,13 +15,13 @@ const SideMenu = ({ nodes, rootId }) => {
       />
     </FullMenu>
   ) : (
-    <button
-      className="fixed flex items-center bottom-10 bg-backgroundWhite text-primaryGreen py-3 px-6 shadow-sideMenuShadow rounded-tr-lg rounded-br-lg focus:outline-secondaryBrown"
+    <Button
+      className="fixed bottom-10 bg-backgroundWhite text-primaryGreen py-3 px-6 shadow-sideMenuShadow rounded-tr-lg rounded-br-lg"
       onClick={() => setIsExpanded(!isExpanded)}
+      title="0612 i Stamtavle 21"
     >
-      <p>0612 i Stamtavle 21</p>
       <IoChevronBackCircle className="text-secondaryBrown ml-12 text-2xl" />
-    </button>
+    </Button>
   );
 };
 
