@@ -15,4 +15,8 @@
     padding: 0;
     box-sizing: inherit;
   }
+
+  button {
+    @apply flex items-center py-2 px-3 bg-primaryGreen text-backgroundWhite rounded-lg shadow-lg focus:outline-secondaryBrown;
+  }
 }

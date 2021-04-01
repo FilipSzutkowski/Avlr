@@ -8,15 +8,19 @@ const IndividualDetails = ({ nodes, rootId, collapseButton }) => {
   const individual = nodes[individualIndex];
   return (
     <article className="flex flex-col h-full mt-4">
-      <section className="mx-4">
+      <section className="mx-4 flex flex-col">
         <img
           src={kanin}
           alt="Individet"
-          className="rounded-full border-2 border-primaryGreen shadow-2xl w-32 sm:w-52"
+          className="rounded-full border-2 border-primaryGreen shadow-2xl w-32 sm:w-52 self-center"
         />
-        <div>
-          <Button title="Se i stamtreet" onClick={collapseButton}>
-            <IoChevronForwardCircle className="text-secondaryBrown ml-5 text-lg" />
+        <div className="flex flex-col">
+          <Button
+            title="Se i stamtreet"
+            onClick={collapseButton}
+            className="self-center my-4"
+          >
+            <IoChevronForwardCircle className="text-secondaryBrown ml-5 text-lg bg-backgroundWhite rounded-full" />
           </Button>
           <dl>
             <DescriptionItem

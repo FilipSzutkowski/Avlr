@@ -15,7 +15,7 @@ const SideMenu = ({ nodes, rootId }) => {
     </FullMenu>
   ) : (
     <button
-      className="fixed flex items-center bottom-10 bg-backgroundWhite text-primaryGreen py-3 px-6 shadow-sideMenuShadow rounded-tr-lg rounded-br-lg"
+      className="fixed flex items-center bottom-10 bg-backgroundWhite text-primaryGreen py-3 px-6 shadow-sideMenuShadow rounded-tr-lg rounded-br-lg focus:outline-secondaryBrown"
       onClick={() => setIsExpanded(!isExpanded)}
     >
       <p>0612 i Stamtavle 21</p>
