@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router';
 import FamilyTree from './familyTree/FamilyTree';
 import Navbar from './navbar/Navbar';
 import SideMenu from './SideMenu';
-import UserFamilyTrees from './UserFamilyTrees';
+import FullMenu from './FullMenu';
 import Loading from './utilities/Loading';
 
 const App = () => {
@@ -35,7 +35,11 @@ const App = () => {
       <Navbar />
       <Switch>
         <Route path="/mine_stamtavler">
-          <UserFamilyTrees trees={familyTrees} loading={loading} />
+          <FullMenu
+            trees={familyTrees}
+            loading={loading}
+            title="Mine Stamtavler"
+          />
         </Route>
         <Route path="/">
           {loading ? (
