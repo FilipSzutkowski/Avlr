@@ -1,16 +1,28 @@
 import FullMenu from './FullMenu';
-import Button from './utilities/Button';
+import Loading from './utilities/Loading';
+//import Button from './utilities/Button';
 import { Link } from 'react-router-dom';
 
-const UserFamilyTrees = () => {
+const UserFamilyTrees = ({ trees, loading }) => {
   return (
-    <FullMenu>
-      <div>
-        <p className="text-xl">Heellooo</p>
-        <Link to="/">
-          <Button title="Go tilbake"></Button>
-        </Link>
-      </div>
+    <FullMenu title="Dine stamtavler">
+      {loading ? (
+        <Loading />
+      ) : trees ? (
+        <div className="flex flex-col divide-y divide-primaryGreen divide-opacity-50 h-full text-neutralDarkBrown">
+          {trees.map(({ id, name }) => (
+            <Link
+              to="#"
+              key={id}
+              className="flex py-3 hover:bg-secondaryBrown hover:text-backgroundWhite"
+            >
+              <span className="mx-3">{name}</span>
+            </Link>
+          ))}
+        </div>
+      ) : (
+        <p>Det har oppstått en feil.</p>
+      )}
     </FullMenu>
   );
 };

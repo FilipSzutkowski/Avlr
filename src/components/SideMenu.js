@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import FullMenu from './FullMenu';
-import IndividualDetails from './IndividualDetails';
+import IndividualDetails from './individualDetails/IndividualDetails';
 import Button from './utilities/Button';
 import { IoChevronBackCircle } from 'react-icons/io5';
 
 const SideMenu = ({ nodes, rootId }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   return isExpanded ? (
-    <FullMenu>
+    <FullMenu title="individ">
       <IndividualDetails
         nodes={nodes}
         rootId={rootId}

@@ -1,6 +1,6 @@
 import DescriptionItem from './DescriptionItem';
-import Button from './utilities/Button';
-import kanin from './assets/kanin.jpg';
+import Button from '../utilities/Button';
+import kanin from '../assets/kanin.jpg';
 import { IoChevronForwardCircle } from 'react-icons/io5';
 
 const IndividualDetails = ({ nodes, rootId, collapseButton }) => {

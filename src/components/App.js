@@ -4,19 +4,22 @@ import FamilyTree from './familyTree/FamilyTree';
 import Navbar from './navbar/Navbar';
 import SideMenu from './SideMenu';
 import UserFamilyTrees from './UserFamilyTrees';
+import Loading from './utilities/Loading';
 
 const App = () => {
   const [nodes, setNodes] = useState(null);
   const [rootId, setRootId] = useState(null);
+  const [familyTrees, setFamilyTrees] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch('/getTree');
+        const res = await fetch('/getFamilyTrees');
         const data = await res.json();
 
-        setNodes(data);
+        setFamilyTrees(data);
+        setNodes(data[0].treeData);
         setRootId('HkqEDLvxE');
         setLoading(false);
       } catch (err) {
@@ -32,11 +35,11 @@ const App = () => {
       <Navbar />
       <Switch>
         <Route path="/mine_stamtavler">
-          <UserFamilyTrees />
+          <UserFamilyTrees trees={familyTrees} loading={loading} />
         </Route>
         <Route path="/">
           {loading ? (
-            <div>Laster inn</div>
+            <Loading className="relative top-16" />
           ) : (
             <>
               <FamilyTree
