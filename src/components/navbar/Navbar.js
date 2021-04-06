@@ -11,7 +11,7 @@ const Navbar = () => {
   };
   return (
     <>
-      <nav className="fixed z-30 rounded-b-xl shadow-lg bg-backgroundWhite py-1 w-screen">
+      <nav className="fixed top-0 z-30 rounded-b-xl shadow-lg bg-backgroundWhite py-1 w-screen">
         <ul className="flex items-center text-primaryGreen font-light text-sm mx-4">
           <li>
             <Logo className="w-20 shadow-logoShadow rounded-tl-logoTopLeft rounded-br-logoBottomRight rounded-tr-logoTopRight rounded-bl-logoBottomLeft" />

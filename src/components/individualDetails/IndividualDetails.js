@@ -1,11 +1,12 @@
+import { useParams, Link } from 'react-router-dom';
 import DescriptionItem from './DescriptionItem';
 import Button from '../utilities/Button';
 import kanin from '../assets/kanin.jpg';
 import { IoChevronForwardCircle } from 'react-icons/io5';
 
-const IndividualDetails = ({ nodes, rootId, collapseButton }) => {
-  const individualIndex = nodes.findIndex((node) => node.id === rootId);
-  const individual = nodes[individualIndex];
+const IndividualDetails = ({ trees }) => {
+  const { treeIndex, individIndex } = useParams();
+  const individual = trees[treeIndex].treeData[individIndex];
   return (
     <article className="flex flex-col h-full mt-4">
       <section className="mx-4 flex flex-col">
@@ -15,13 +16,14 @@ const IndividualDetails = ({ nodes, rootId, collapseButton }) => {
           className="rounded-full border-2 border-primaryGreen shadow-2xl w-32 sm:w-52 self-center"
         />
         <div className="flex flex-col">
-          <Button
-            title="Se i stamtreet"
-            onClick={collapseButton}
+          <Link
+            to={`/tree/${treeIndex}/${individIndex}`}
             className="self-center my-4"
           >
-            <IoChevronForwardCircle className="text-secondaryBrown ml-5 text-lg bg-backgroundWhite rounded-full" />
-          </Button>
+            <Button title="Se i stamtreet">
+              <IoChevronForwardCircle className="text-secondaryBrown ml-5 text-lg bg-backgroundWhite rounded-full" />
+            </Button>
+          </Link>
           <dl>
             <DescriptionItem
               title="Øremerke:"

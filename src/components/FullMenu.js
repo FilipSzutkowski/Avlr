@@ -1,10 +1,12 @@
 import Button from './utilities/Button';
 import UserFamilyTrees from './UserFamilyTrees';
 import UserIndividuals from './UserIndividuals';
+import IndividualDetails from './individualDetails/IndividualDetails';
+import Loading from './utilities/Loading';
 import { Link, Switch, useRouteMatch, Route } from 'react-router-dom';
 import { IoChevronBackCircle } from 'react-icons/io5';
 
-const FullMenu = ({ children, title, ...rest }) => {
+const FullMenu = ({ children, loading, trees }) => {
   const { url, path } = useRouteMatch();
   return (
     <main className="flex flex-col absolute overflow-y-hidden overflow-x-hidden w-full bg-backgroundWhite h-full top-16 rounded-t-xl shadow-logoShadow text-primaryGreen font-light pb-16">
@@ -14,26 +16,27 @@ const FullMenu = ({ children, title, ...rest }) => {
             <IoChevronBackCircle className="text-secondaryBrown text-xl" />
           </Button>
         </Link>
-        <p className="ml-3">{title}</p>
+        <p className="ml-3">Mine stamtavler</p>
         <p className="ml-auto">Search Component</p>
       </section>
       <div className="h-full overflow-x-auto overflow-y-auto">
-        <Switch>
-          <Route exact path={path}>
-            <UserFamilyTrees
-              trees={rest.trees}
-              loading={rest.loading}
-              url={url}
-            />
-          </Route>
-          <Route path={`${path}/:treeId`}>
-            <UserIndividuals
-              trees={rest.trees}
-              loading={rest.loading}
-              url={url}
-            />
-          </Route>
-        </Switch>
+        {loading ? (
+          <Loading />
+        ) : trees ? (
+          <Switch>
+            <Route exact path={path}>
+              <UserFamilyTrees trees={trees} url={url} />
+            </Route>
+            <Route exact path={`${path}/:treeIndex`}>
+              <UserIndividuals trees={trees} url={url} />
+            </Route>
+            <Route exact path={`${path}/:treeIndex/:individIndex`}>
+              <IndividualDetails trees={trees} url={url} />
+            </Route>
+          </Switch>
+        ) : (
+          <div>Det oppstod en feil. Prøv igjen.</div>
+        )}
       </div>
     </main>
   );

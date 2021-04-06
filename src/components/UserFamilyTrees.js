@@ -1,23 +1,10 @@
-import Loading from './utilities/Loading';
-import { Link } from 'react-router-dom';
+import FamilyTreeList from './FamilyTreeList';
 
-const UserFamilyTrees = ({ trees, loading, url }) => {
-  return loading ? (
-    <Loading />
-  ) : trees ? (
+const UserFamilyTrees = ({ trees, url }) => {
+  return (
     <div className="flex flex-col divide-y divide-primaryGreen divide-opacity-50 h-full text-neutralDarkBrown">
-      {trees.map(({ id, name }) => (
-        <Link
-          to={`${url}/${id}`}
-          key={id}
-          className="flex py-3 hover:bg-secondaryBrown hover:text-backgroundWhite"
-        >
-          <span className="mx-3">{name ?? 'Stamtavle uten navn'}</span>
-        </Link>
-      ))}
+      {<FamilyTreeList trees={trees} url={`${url}`} />}
     </div>
-  ) : (
-    <p>Det har oppstått en feil.</p>
   );
 };
 
