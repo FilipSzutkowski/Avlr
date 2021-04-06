@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactFamilyTree from 'react-family-tree';
 import FamilyNode from './FamilyNode';
 

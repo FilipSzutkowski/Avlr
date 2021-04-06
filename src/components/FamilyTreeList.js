@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-
 const FamilyTreeList = ({ trees, url }) => {
   return trees.map(({ id, name }, index) => (
     <Link
