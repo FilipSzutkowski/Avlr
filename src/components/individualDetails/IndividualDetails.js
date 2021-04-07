@@ -4,9 +4,12 @@ import Button from '../utilities/Button';
 import kanin from '../assets/kanin.jpg';
 import { IoChevronForwardCircle } from 'react-icons/io5';
 
-const IndividualDetails = ({ trees }) => {
+const IndividualDetails = ({ trees, useNavigation, url }) => {
   const { treeIndex, individIndex } = useParams();
-  const individual = trees[treeIndex].treeData[individIndex];
+  const { earmark, regNr, race, birthday, color, poeng } = trees[
+    treeIndex
+  ].treeData[individIndex];
+  useNavigation(`${url}/${treeIndex}`, earmark, false);
   return (
     <article className="flex flex-col h-full mt-4">
       <section className="mx-4 flex flex-col">
@@ -27,27 +30,27 @@ const IndividualDetails = ({ trees }) => {
           <dl>
             <DescriptionItem
               title="Øremerke:"
-              description={individual.earmark ?? 'Ikke oppgitt'}
+              description={earmark ?? 'Ikke oppgitt'}
             />
             <DescriptionItem
               title="Reg. Nr.:"
-              description={individual.regNr ?? 'Ikke oppgitt'}
+              description={regNr ?? 'Ikke oppgitt'}
             />
             <DescriptionItem
               title="Rase:"
-              description={individual.race ?? 'Ikke oppgitt'}
+              description={race ?? 'Ikke oppgitt'}
             />
             <DescriptionItem
               title="Født:"
-              description={individual.birthday ?? 'Ikke oppgitt'}
+              description={birthday ?? 'Ikke oppgitt'}
             />
             <DescriptionItem
               title="Farge:"
-              description={individual.color ?? 'Ikke oppgitt'}
+              description={color ?? 'Ikke oppgitt'}
             />
             <DescriptionItem
               title="Poeng:"
-              description={individual.poeng ?? 'Ikke oppgitt'}
+              description={poeng ?? 'Ikke oppgitt'}
             />
           </dl>
         </div>

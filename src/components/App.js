@@ -18,7 +18,7 @@ const App = () => {
         setFamilyTrees(data);
         setLoading(false);
       } catch (err) {
-        setLoading(true);
+        setFamilyTrees(err);
         return err;
       }
     };
