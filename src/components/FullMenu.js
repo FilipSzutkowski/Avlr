@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import Button from './utilities/Button';
-import FamilyRoutes from './FamilyRoutes';
-import Loading from './utilities/Loading';
+import FamilyRoutes from './fullMenuFamilyTreeView/FamilyRoutes';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { IoChevronBackCircle } from 'react-icons/io5';
 
@@ -42,18 +41,13 @@ const FullMenu = ({ loading, trees }) => {
         <p className="ml-auto">Search Component</p>
       </section>
       <div className="h-full overflow-x-auto overflow-y-auto">
-        {loading ? (
-          <Loading />
-        ) : trees ? (
-          <FamilyRoutes
-            path={path}
-            trees={trees}
-            url={url}
-            useNavigation={useNavigation}
-          />
-        ) : (
-          <div>Det oppstod en feil. Prøv igjen.</div>
-        )}
+        <FamilyRoutes
+          path={path}
+          trees={trees}
+          url={url}
+          useNavigation={useNavigation}
+          loading={loading}
+        />
       </div>
     </main>
   );
