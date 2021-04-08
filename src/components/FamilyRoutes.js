@@ -1,6 +1,6 @@
 import { Route, Switch } from 'react-router-dom';
 import UserFamilyTrees from './familyTreeList/UserFamilyTrees';
-import UserIndividuals from './UserIndividuals';
+import UserIndividuals from './individualList/UserIndividuals';
 import IndividualDetails from './individualDetails/IndividualDetails';
 
 const FamilyRoutes = ({ path, trees, url, useNavigation }) => {
