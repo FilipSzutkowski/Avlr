@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Switch, Route } from 'react-router';
 import Navbar from './navbar/Navbar';
+import SignUp from './auth/SignUp';
+import LogIn from './auth/LogIn';
+import LogOut from './auth/LogOut';
+import ProtectedRoute from './auth/ProtectedRoute';
 import FullMenu from './FullMenu';
 import FamilyTreeContainer from './familyTreeView/FamilyTreeContainer';
 import ErrorBoundary from './utilities/ErrorBoundary';
@@ -29,9 +33,16 @@ const App = () => {
       <Navbar />
       <ErrorBoundary>
         <Switch>
-          <Route path="/mine_stamtavler">
-            <FullMenu trees={familyTrees} loading={loading} />
+          <Route path="/ny_bruker">
+            <SignUp />
           </Route>
+          <Route path="/login">
+            <LogIn />
+            <LogOut />
+          </Route>
+          <ProtectedRoute path="/mine_stamtavler">
+            <FullMenu trees={familyTrees} loading={loading} />
+          </ProtectedRoute>
           <Route path="/tree/:treeIndex/:individIndex">
             <FamilyTreeContainer trees={familyTrees} loading={loading} />
           </Route>
