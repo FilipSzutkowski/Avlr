@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
 import history from './components/utilities/History';
+import ErrorBoundary from './components/utilities/ErrorBoundary';
 import { Auth0Provider } from '@auth0/auth0-react';
 import { Router } from 'react-router-dom';
 
@@ -19,7 +20,9 @@ ReactDOM.render(
       onRedirectCallback={onRedirectCallback}
     >
       <Router history={history}>
-        <App />
+        <ErrorBoundary>
+          <App />
+        </ErrorBoundary>
       </Router>
     </Auth0Provider>
   </React.StrictMode>,

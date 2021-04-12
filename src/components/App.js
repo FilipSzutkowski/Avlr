@@ -2,16 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { Switch, Route } from 'react-router';
 import Navbar from './navbar/Navbar';
 import SignUp from './auth/SignUp';
-import LogIn from './auth/LogIn';
-import LogOut from './auth/LogOut';
 import ProtectedRoute from './auth/ProtectedRoute';
 import FullMenu from './FullMenu';
 import FamilyTreeContainer from './familyTreeView/FamilyTreeContainer';
 import ErrorBoundary from './utilities/ErrorBoundary';
+import Loading from './utilities/Loading';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const App = () => {
   const [familyTrees, setFamilyTrees] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { isAuthenticated, isLoading, user } = useAuth0();
+  console.log(`Auth0 auth: ${isAuthenticated}, Auth0 loading: ${isLoading}`);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,30 +28,33 @@ const App = () => {
         return err;
       }
     };
-    fetchData();
-  }, []);
+
+    isAuthenticated && fetchData();
+    setLoading(isLoading);
+  }, [isLoading, isAuthenticated]);
+
   return (
     <div className="container text-neutralDarkBrown w-full h-full">
-      <Navbar />
+      <Navbar loading={loading} isAuthenticated={isAuthenticated} user={user} />
       <ErrorBoundary>
         <Switch>
           <Route path="/ny_bruker">
             <SignUp />
           </Route>
-          <Route path="/login">
-            <LogIn />
-            <LogOut />
-          </Route>
-          <ProtectedRoute path="/mine_stamtavler">
+          <ProtectedRoute path="/mine_stamtavler" setLoading={setLoading}>
             <FullMenu trees={familyTrees} loading={loading} />
           </ProtectedRoute>
-          <Route path="/tree/:treeIndex/:individIndex">
+          <ProtectedRoute path="/tree/:treeIndex/:individIndex">
             <FamilyTreeContainer trees={familyTrees} loading={loading} />
-          </Route>
+          </ProtectedRoute>
           <Route path="*">
-            <h1 className="relative text-center top-16 text-lg">
-              Siden finnes ikke
-            </h1>
+            {loading ? (
+              <Loading className="relative text-center top-16 text-lg" />
+            ) : (
+              <h1 className="relative text-center top-16 text-lg">
+                Siden finnes ikke
+              </h1>
+            )}
           </Route>
         </Switch>
       </ErrorBoundary>

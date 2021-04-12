@@ -17,9 +17,9 @@ class ErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       return (
-        <h1 className="relative top-16 text-lg text-center">
-          Noe gikk galt...
-        </h1>
+        <div className="relative top-16 text-lg text-center">
+          <h1 className="">Noe gikk galt...</h1>
+        </div>
       );
     }
 

@@ -1,13 +1,12 @@
 import { useAuth0 } from '@auth0/auth0-react';
+import Button from '../utilities/Button';
 
-const LogIn = () => {
-  const { loginWithRedirect, isAuthenticated, user, loading } = useAuth0();
-  return isAuthenticated && !loading ? (
-    <h1 className="relative top-16">Logget inn! Velkommen {user.nickname}</h1>
-  ) : (
-    <button className="relative top-16" onClick={() => loginWithRedirect()}>
+const LogIn = ({ className }) => {
+  const { loginWithRedirect } = useAuth0();
+  return (
+    <Button className={className} onClick={() => loginWithRedirect()}>
       Logg inn
-    </button>
+    </Button>
   );
 };
 

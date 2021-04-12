@@ -4,7 +4,7 @@ import ExpandedUser from './ExpandedUser';
 import BackgroundDropShadow from '../utilities/BackgroundDropShadow';
 import { ReactComponent as Logo } from '../assets/Logo.svg';
 
-const Navbar = () => {
+const Navbar = ({ loading, isAuthenticated, user }) => {
   const [isExpanded, setExpand] = useState(false);
   const handleClick = () => {
     setExpand((isExpanded) => !isExpanded);
@@ -19,7 +19,13 @@ const Navbar = () => {
           <li className="hidden sm:inline-block mx-4">Hjem</li>
           <li className="hidden sm:inline-block mx-4">Mine Stamtavler</li>
           <li className="hidden sm:inline-block mx-4">Om Avlr</li>
-          <UserSection onClick={handleClick} isNavbarExpanded={isExpanded} />
+          <UserSection
+            onClick={handleClick}
+            isNavbarExpanded={isExpanded}
+            loading={loading}
+            isAuthenticated={isAuthenticated}
+            user={user}
+          />
         </ul>
         {isExpanded && <ExpandedUser onClick={handleClick} />}
       </nav>
