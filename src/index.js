@@ -2,8 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
+import history from './components/utilities/History';
 import { Auth0Provider } from '@auth0/auth0-react';
-import { BrowserRouter } from 'react-router-dom';
+import { Router } from 'react-router-dom';
+
+const onRedirectCallback = (appState) => {
+  history.replace(appState?.returnTo || window.location.pathname);
+};
 
 ReactDOM.render(
   <React.StrictMode>
@@ -11,10 +16,11 @@ ReactDOM.render(
       domain={process.env.REACT_APP_auth0_domain}
       clientId={process.env.REACT_APP_auth0_clientID}
       redirectUri={window.location.origin}
+      onRedirectCallback={onRedirectCallback}
     >
-      <BrowserRouter>
+      <Router history={history}>
         <App />
-      </BrowserRouter>
+      </Router>
     </Auth0Provider>
   </React.StrictMode>,
   document.getElementById('root')

@@ -1,14 +1,14 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import Button from '../utilities/Button';
 
-const LogOut = () => {
+const LogOut = ({ className, children }) => {
   const { logout } = useAuth0();
   return (
     <Button
-      className="relative top-16"
+      className={className}
       onClick={() => logout({ returnTo: window.location.origin })}
     >
-      Log Ut
+      {children}
     </Button>
   );
 };

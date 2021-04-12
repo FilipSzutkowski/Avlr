@@ -20,3 +20,9 @@
     @apply flex items-center py-2 px-3 bg-primaryGreen text-backgroundWhite rounded-lg shadow-lg focus:outline-secondaryBrown;
   }
 }
+
+@layer utilities {
+  .border-t-1 {
+    border-top-width: 1px;
+  }
+}
