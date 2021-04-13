@@ -29,8 +29,8 @@ const App = () => {
       }
     };
 
+    isLoading ? setLoading(true) : setLoading(false);
     isAuthenticated && fetchData();
-    setLoading(isLoading);
   }, [isLoading, isAuthenticated]);
 
   return (

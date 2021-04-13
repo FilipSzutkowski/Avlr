@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const ExpandedUser = ({ onClick }) => {
   return (
     <nav
-      className="flex flex-col z-20 mx-4 py-3 space-y-4 items-end text-right font-light"
+      className="flex flex-col z-20 mx-4 py-3 items-end text-right font-light"
       onClick={onClick}
     >
       <ul>
