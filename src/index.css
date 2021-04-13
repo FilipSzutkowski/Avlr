@@ -23,6 +23,10 @@
   input {
     @apply text-neutralDarkBrown font-light bg-backgroundWhite rounded-lg shadow-sideMenuShadow pl-2 py-1;
   }
+
+  label {
+    @apply text-primaryGreen font-normal;
+  }
 }
 
 @layer utilities {
