@@ -21,6 +21,7 @@ const App = () => {
         const res = await fetch('/getFamilyTrees');
         const data = await res.json();
 
+        console.log('inside fetch');
         setFamilyTrees(data);
         setLoading(false);
       } catch (err) {
@@ -29,9 +30,11 @@ const App = () => {
       }
     };
 
-    isLoading ? setLoading(true) : setLoading(false);
+    if (isLoading && !loading) setLoading(true);
+    if (!isAuthenticated && !isLoading) setLoading(false);
+
     isAuthenticated && fetchData();
-  }, [isLoading, isAuthenticated]);
+  }, [isLoading, isAuthenticated, loading]);
 
   return (
     <div className="container text-neutralDarkBrown w-full h-full">

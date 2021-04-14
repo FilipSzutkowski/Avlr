@@ -38,7 +38,6 @@ const FullMenu = ({ loading, trees }) => {
           </Button>
         </Link>
         <p className="ml-3">{navigation.title}</p>
-        <p className="ml-auto">Search Component</p>
       </section>
       <div className="h-full overflow-x-auto overflow-y-auto">
         <FamilyRoutes

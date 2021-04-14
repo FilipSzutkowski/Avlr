@@ -9,7 +9,7 @@ const IndividualDetails = ({ trees, useNavigation, url }) => {
   const { earmark, regNr, race, birthday, color, poeng } = trees[
     treeIndex
   ].treeData[individIndex];
-  useNavigation(`${url}/${treeIndex}`, earmark, false);
+  useNavigation(`${url}/${treeIndex}`, regNr, false);
   return (
     <article className="flex flex-col h-full mt-4">
       <section className="mx-4 flex flex-col">

@@ -27,6 +27,10 @@
   label {
     @apply text-primaryGreen font-normal;
   }
+
+  select {
+    @apply text-neutralDarkBrown font-light bg-backgroundWhite rounded-lg shadow-sideMenuShadow pl-2 py-1;
+  }
 }
 
 @layer utilities {
