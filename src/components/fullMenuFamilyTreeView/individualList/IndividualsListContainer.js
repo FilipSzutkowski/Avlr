@@ -2,17 +2,18 @@ import IndividualsList from './IndividualsList';
 import { useParams } from 'react-router-dom';
 import Button from '../../utilities/Button';
 import { IoAddCircle } from 'react-icons/io5';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import NewIndividualForm from './NewIndividualForm';
+import TreeContext from '../../TreeContext';
 
-const UserIndividuals = ({ trees, url, useNavigation }) => {
+const UserIndividuals = ({ url, useNavigation }) => {
+  const { familyTrees, setFamilyTrees } = useContext(TreeContext);
   const [addingIndivid, setAddingIndivid] = useState(false);
   const [previousUrl, setPreviousUrl] = useState(url);
   const [formData, setFormData] = useState({});
   const { treeIndex } = useParams();
-  const { treeData: tree, name } = trees[treeIndex];
+  const { treeData: tree, name } = familyTrees[treeIndex];
   const [title, setTitle] = useState(name);
-
   const handleClick = () => {
     setPreviousUrl(`${url}/${treeIndex}`);
     setTitle('Nytt individ');

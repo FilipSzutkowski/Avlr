@@ -8,6 +8,7 @@ import FamilyTreeContainer from './familyTreeView/FamilyTreeContainer';
 import ErrorBoundary from './utilities/ErrorBoundary';
 import Loading from './utilities/Loading';
 import { useAuth0 } from '@auth0/auth0-react';
+import TreeContext from './TreeContext';
 
 const App = () => {
   const [familyTrees, setFamilyTrees] = useState(null);
@@ -44,8 +45,10 @@ const App = () => {
           <Route path="/ny_bruker">
             <SignUp />
           </Route>
-          <ProtectedRoute path="/mine_stamtavler" setLoading={setLoading}>
-            <FullMenu trees={familyTrees} loading={loading} />
+          <ProtectedRoute path="/mine_stamtavler">
+            <TreeContext.Provider value={{ familyTrees, setFamilyTrees }}>
+              <FullMenu loading={loading} />
+            </TreeContext.Provider>
           </ProtectedRoute>
           <ProtectedRoute path="/tree/:treeIndex/:individIndex">
             <FamilyTreeContainer trees={familyTrees} loading={loading} />

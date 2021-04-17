@@ -3,10 +3,13 @@ import DescriptionItem from './DescriptionItem';
 import Button from '../../utilities/Button';
 import kanin from '../../assets/kanin.jpg';
 import { IoChevronForwardCircle } from 'react-icons/io5';
+import { useContext } from 'react';
+import TreeContext from '../../TreeContext';
 
-const IndividualDetails = ({ trees, useNavigation, url }) => {
+const IndividualDetails = ({ useNavigation, url }) => {
+  const { familyTrees, setFamilyTrees } = useContext(TreeContext);
   const { treeIndex, individIndex } = useParams();
-  const { earmark, regNr, race, birthday, color, poeng } = trees[
+  const { earmark, regNr, race, birthday, color, poeng } = familyTrees[
     treeIndex
   ].treeData[individIndex];
   useNavigation(`${url}/${treeIndex}`, regNr, false);

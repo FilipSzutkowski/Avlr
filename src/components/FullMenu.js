@@ -42,7 +42,6 @@ const FullMenu = ({ loading, trees }) => {
       <div className="h-full overflow-x-auto overflow-y-auto">
         <FamilyRoutes
           path={path}
-          trees={trees}
           url={url}
           useNavigation={useNavigation}
           loading={loading}

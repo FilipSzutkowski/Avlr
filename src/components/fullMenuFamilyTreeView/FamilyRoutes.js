@@ -3,32 +3,23 @@ import FamilyTreeListContainer from './familyTreeList/FamilyTreeListContainer';
 import IndividualListContainer from './individualList/IndividualsListContainer';
 import IndividualDetails from './individualDetails/IndividualDetails';
 import Loading from '../utilities/Loading';
+import TreeContext from '../TreeContext';
+import { useContext } from 'react';
 
-const FamilyRoutes = ({ path, trees, url, useNavigation, loading }) => {
+const FamilyRoutes = ({ path, url, useNavigation, loading }) => {
+  const { familyTrees } = useContext(TreeContext);
   return loading ? (
     <Loading />
-  ) : trees ? (
+  ) : familyTrees ? (
     <Switch>
       <Route exact path={path}>
-        <FamilyTreeListContainer
-          trees={trees}
-          url={url}
-          useNavigation={useNavigation}
-        />
+        <FamilyTreeListContainer url={url} useNavigation={useNavigation} />
       </Route>
       <Route exact path={`${path}/:treeIndex`}>
-        <IndividualListContainer
-          trees={trees}
-          url={url}
-          useNavigation={useNavigation}
-        />
+        <IndividualListContainer url={url} useNavigation={useNavigation} />
       </Route>
       <Route exact path={`${path}/:treeIndex/:individIndex`}>
-        <IndividualDetails
-          trees={trees}
-          useNavigation={useNavigation}
-          url={url}
-        />
+        <IndividualDetails useNavigation={useNavigation} url={url} />
       </Route>
     </Switch>
   ) : (
