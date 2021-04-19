@@ -5,14 +5,17 @@ import { IoAddCircle } from 'react-icons/io5';
 import { useContext, useState } from 'react';
 import NewIndividualForm from './NewIndividualForm';
 import TreeContext from '../../TreeContext';
+import { useForm } from '../useForm';
+import { POSTnewIndividual } from '../../APICalls';
 
 const UserIndividuals = ({ url, useNavigation }) => {
   const { familyTrees, setFamilyTrees } = useContext(TreeContext);
   const [addingIndivid, setAddingIndivid] = useState(false);
   const [previousUrl, setPreviousUrl] = useState(url);
-  const [formData, setFormData] = useState({});
+  const [formData, handleChange] = useForm({});
+  const [error, setError] = useState(null);
   const { treeIndex } = useParams();
-  const { treeData: tree, name } = familyTrees[treeIndex];
+  const { treeData: tree, name, id: treeId } = familyTrees[treeIndex];
   const [title, setTitle] = useState(name);
   const handleClick = () => {
     setPreviousUrl(`${url}/${treeIndex}`);
@@ -20,19 +23,17 @@ const UserIndividuals = ({ url, useNavigation }) => {
     setAddingIndivid(true);
   };
 
-  const handleChange = (e) => {
-    const target = e.target;
-    const { value, name } = target;
-
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('submit');
+    const newIndividual = { ...formData };
+    const result = await POSTnewIndividual(newIndividual, treeId);
+    if (result instanceof Error) {
+      setError(result);
+      return;
+    }
+    console.log(formData);
+    setAddingIndivid(false);
+    setFamilyTrees(result);
   };
   useNavigation(previousUrl, title, false);
   return (

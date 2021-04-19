@@ -11,10 +11,12 @@ import { useAuth0 } from '@auth0/auth0-react';
 import TreeContext from './TreeContext';
 
 const App = () => {
-  const [familyTrees, setFamilyTrees] = useState(null);
+  const [familyTrees, setFamilyTrees] = useState([]);
   const [loading, setLoading] = useState(true);
   const { isAuthenticated, isLoading, user } = useAuth0();
-  console.log(`Auth0 auth: ${isAuthenticated}, Auth0 loading: ${isLoading}`);
+  console.log(
+    `Auth0 auth: ${isAuthenticated}, Auth0 loading: ${isLoading}, State loading: ${loading}`
+  );
 
   useEffect(() => {
     const fetchData = async () => {

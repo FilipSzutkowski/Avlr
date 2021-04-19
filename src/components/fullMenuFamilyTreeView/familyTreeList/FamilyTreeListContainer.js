@@ -3,30 +3,30 @@ import Button from '../../utilities/Button';
 import { IoAddCircle } from 'react-icons/io5';
 import { useContext, useState } from 'react';
 import TreeContext from '../../TreeContext';
+import { useForm } from '../useForm';
+import { POSTnewFamilyTree } from '../../APICalls';
 
 const UserFamilyTrees = ({ url, useNavigation }) => {
   const [addingTree, setAddingTree] = useState(false);
-  const [formData, setFormData] = useState({});
+  const [formData, handleChange] = useForm({});
   const [title, setTitle] = useState('Stamtavler');
+  const [error, setError] = useState(null);
   const { familyTrees, setFamilyTrees } = useContext(TreeContext);
   const handleClick = () => {
     setTitle('Ny stamtavle');
     setAddingTree(true);
   };
-  const handleChange = (e) => {
-    const target = e.target;
-    const { value, name } = target;
 
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const id = familyTrees.length + 1;
-    const newFamilyTree = { id, ...formData, treeData: [] };
-    setFamilyTrees([...familyTrees, newFamilyTree]);
+    const newFamilyTree = { ...formData };
+    const result = await POSTnewFamilyTree(newFamilyTree);
+    if (result instanceof Error) {
+      setError(result);
+      return;
+    }
+    setAddingTree(false);
+    setFamilyTrees(result);
   };
   useNavigation(url, title, !addingTree);
   return (
@@ -57,6 +57,11 @@ const UserFamilyTrees = ({ url, useNavigation }) => {
             <IoAddCircle className="text-xl mr-3 text-secondaryBrown bg-backgroundWhite rounded-full" />
             Lagre
           </Button>
+          {error && (
+            <p className="text-secondaryBrown">
+              Det oppstod en feil: {error.message}
+            </p>
+          )}
         </form>
       ) : (
         <>

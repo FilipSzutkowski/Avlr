@@ -11,6 +11,7 @@ class ErrorBoundary extends React.Component {
   }
 
   componentDidCatch(error, errorInfo) {
+    this.errorInfo = errorInfo;
     console.log(error, errorInfo);
   }
 
@@ -19,6 +20,7 @@ class ErrorBoundary extends React.Component {
       return (
         <div className="relative top-16 text-lg text-center">
           <h1 className="">Noe gikk galt...</h1>
+          <p>{this.errorInfo}</p>
         </div>
       );
     }
