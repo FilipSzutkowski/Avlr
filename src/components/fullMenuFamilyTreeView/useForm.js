@@ -6,6 +6,15 @@ export const useForm = (initialValue) => {
     const target = e.target;
     const { value, name } = target;
 
+    if (name === 'father' || name === 'mother') {
+      setFormData({
+        ...formData,
+        parents: [...formData.parents, { id: value, type: 'blood' }],
+      });
+
+      return;
+    }
+
     setFormData({
       ...formData,
       [name]: value,

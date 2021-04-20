@@ -12,7 +12,12 @@ const UserIndividuals = ({ url, useNavigation }) => {
   const { familyTrees, setFamilyTrees } = useContext(TreeContext);
   const [addingIndivid, setAddingIndivid] = useState(false);
   const [previousUrl, setPreviousUrl] = useState(url);
-  const [formData, handleChange] = useForm({});
+  const [formData, handleChange] = useForm({
+    parents: [],
+    siblings: [],
+    spouses: [],
+    children: [],
+  });
   const [error, setError] = useState(null);
   const { treeIndex } = useParams();
   const { treeData: tree, name, id: treeId } = familyTrees[treeIndex];
@@ -25,7 +30,7 @@ const UserIndividuals = ({ url, useNavigation }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const newIndividual = { ...formData };
+    const newIndividual = { ...formData }; //Fyll ut alt som trenges for familyTree biblioteket
     const result = await POSTnewIndividual(newIndividual, treeId);
     if (result instanceof Error) {
       setError(result);

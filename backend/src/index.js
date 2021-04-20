@@ -30,6 +30,18 @@ app.post('/newIndividual', (req, res) => {
   const oldTreeIndex = familyTrees.findIndex((tree) => tree.id == treeId);
   const oldTree = { ...familyTrees[oldTreeIndex] };
   const oldTreeTreeData = oldTree.treeData;
+  let parents = newIndividual.parents.length > 0 ? newIndividual.parents : null;
+
+  if (parents) {
+    const parentsIndexes = parents.map((parent) => {
+      return oldTreeTreeData.findIndex(
+        (individual) => individual.id == parent.id
+      );
+    });
+
+    parents = parentsIndexes;
+    console.log(`parentIndexes: ${parentsIndexes}`);
+  }
 
   console.log(oldTree);
   console.log(oldTreeTreeData);

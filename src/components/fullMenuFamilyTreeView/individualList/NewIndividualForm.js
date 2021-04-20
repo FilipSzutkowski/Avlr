@@ -95,16 +95,16 @@ const NewIndividualForm = ({ handleSubmit, handleChange, tree }) => {
           Far og mor:
           <select name="father" onChange={handleChange}>
             <option value="">Far ikke oppgitt.</option>
-            {tree.map((individ, index) => (
-              <option key={individ.id} value={index}>
+            {tree.map((individ) => (
+              <option key={individ.id} value={individ.id}>
                 {individ.regNr}
               </option>
             ))}
           </select>
           <select name="mother" onChange={handleChange}>
             <option value="">Mor ikke oppgitt.</option>
-            {tree.map((individ, index) => (
-              <option key={individ.id} value={index}>
+            {tree.map((individ) => (
+              <option key={individ.id} value={individ.id}>
                 {individ.regNr}
               </option>
             ))}
