@@ -9,6 +9,7 @@ import ErrorBoundary from './utilities/ErrorBoundary';
 import Loading from './utilities/Loading';
 import { useAuth0 } from '@auth0/auth0-react';
 import TreeContext from './TreeContext';
+import LandingPage from './LandingPage';
 
 const App = () => {
   const [familyTrees, setFamilyTrees] = useState([]);
@@ -44,6 +45,9 @@ const App = () => {
       <Navbar loading={loading} isAuthenticated={isAuthenticated} user={user} />
       <ErrorBoundary>
         <Switch>
+          <Route exact path="/">
+            <LandingPage />
+          </Route>
           <Route path="/ny_bruker">
             <SignUp />
           </Route>
