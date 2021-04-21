@@ -3,7 +3,11 @@ import profilePic from '../assets/profilePic.png';
 import Button from '../utilities/Button';
 import Loading from '../utilities/Loading';
 import LogIn from '../auth/LogIn';
-import { IoChevronDownCircle, IoChevronUpCircle } from 'react-icons/io5';
+import {
+  IoChevronDownCircle,
+  IoChevronUpCircle,
+  IoPerson,
+} from 'react-icons/io5';
 
 const UserSection = ({
   onClick,
@@ -40,7 +44,10 @@ const UserSection = ({
   ) : loading ? (
     <Loading className="ml-auto"> </Loading>
   ) : (
-    <LogIn className="ml-auto" />
+    <LogIn className="ml-auto bg-secondaryBrown shadow-logoShadow">
+      Logg inn
+      <IoPerson className="text-backgroundWhite ml-3" />
+    </LogIn>
   );
 };
 

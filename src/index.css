@@ -17,7 +17,7 @@
   }
 
   button {
-    @apply flex items-center py-2 px-3 bg-primaryGreen text-backgroundWhite rounded-lg shadow-lg focus:outline-secondaryBrown;
+    @apply flex items-center py-2 px-3 bg-primaryGreen font-light text-backgroundWhite rounded-lg shadow-lg focus:outline-secondaryBrown;
   }
 
   input {
@@ -36,5 +36,11 @@
 @layer utilities {
   .border-t-1 {
     border-top-width: 1px;
+  }
+}
+
+@layer components {
+  .landingSection {
+    @apply shadow-sideMenuShadow px-4 py-6 mx-3 rounded-md;
   }
 }

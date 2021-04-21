@@ -41,7 +41,7 @@ const App = () => {
   }, [isLoading, isAuthenticated, loading]);
 
   return (
-    <div className="container text-neutralDarkBrown w-full h-full">
+    <div className="text-neutralDarkBrown w-full h-full">
       <Navbar loading={loading} isAuthenticated={isAuthenticated} user={user} />
       <ErrorBoundary>
         <Switch>
