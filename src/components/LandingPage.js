@@ -4,6 +4,7 @@ import { ReactComponent as LandingIllustration } from './assets/landingIcon.svg'
 import { ReactComponent as FamiliesIllustration } from './assets/stamtavler.svg';
 import { ReactComponent as InidividualsIllustration } from './assets/individer.svg';
 import { ReactComponent as TreesIllustration } from './assets/trees.svg';
+import { ReactComponent as Bubbles } from './assets/bubbles.svg';
 import LogIn from './auth/LogIn';
 import Button from './utilities/Button';
 import { useLocation } from 'react-router';
@@ -31,7 +32,7 @@ const LandingPage = () => {
   return (
     <>
       <main className="relative top-16 pb-2 flex flex-col md:max-w-screen-xl md:w-auto md:m-auto">
-        <section className="flex justify-center landingSection h-vh md:p-8">
+        <section className="md:relative flex justify-center landingSection h-vh md:p-8">
           <article className="flex flex-col md:flex-row items-center justify-around">
             <LandingIllustration className="max-w-xs md:max-w-md lg:max-w-lg h-auto md:pr-32" />
             <div className="flex flex-col md:items-end">
@@ -56,6 +57,7 @@ const LandingPage = () => {
               </div>
             </div>
           </article>
+          <Bubbles className="hidden md:block absolute bottom-0 left-0 opacity-80 max-w-md h-auto " />
         </section>
         <section
           ref={myRef}
