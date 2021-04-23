@@ -16,7 +16,8 @@
     box-sizing: inherit;
   }
 
-  input[type='text'] {
+  input[type='text'],
+  input[type='number'] {
     -webkit-appearance: none;
   }
 
