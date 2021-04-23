@@ -30,28 +30,32 @@ const LandingPage = () => {
   });
   return (
     <>
-      <div className="relative top-16 pb-2 flex flex-col">
-        <section className="flex items-center flex-col landingSection space-y-4">
-          <LandingIllustration className="w-52 h-auto" />
-          <h1 className="text-3xl text-primaryGreen font-bold tracking-tight">
-            Vi hjelper <span className="text-secondaryBrown">deg</span> med å
-            holde oversikt!
-          </h1>
-          <p className=" font-light">
-            Avlr gjør det lett å holde orden på avlen din. Vi gir deg muligheten
-            til å legge til, fjerne eller redigere detaljer om dyrene dine på en
-            enkel måte!
-          </p>
-          <div className="flex space-x-6 py-6 self-start">
-            <Button className="bg-secondaryBrown" onClick={handleClick}>
-              Se mer
-              <IoChevronDownCircle className="text-backgroundWhite ml-3 text-lg" />
-            </Button>
-            <LogIn>
-              Ny konto
-              <IoPersonAdd className="text-backgroundWhite ml-3 text-lg" />
-            </LogIn>
-          </div>
+      <main className="relative top-16 pb-2 flex flex-col md:max-w-screen-xl md:w-auto md:m-auto">
+        <section className="flex justify-center landingSection h-vh md:p-8">
+          <article className="flex flex-col md:flex-row items-center justify-around">
+            <LandingIllustration className="max-w-xs md:max-w-md lg:max-w-lg h-auto md:pr-32" />
+            <div className="flex flex-col md:items-end">
+              <h1 className="text-3xl text-primaryGreen font-bold tracking-tight pb-2 md:text-right md:text-5xl">
+                Vi hjelper <span className="text-secondaryBrown">deg</span> med
+                å holde oversikt!
+              </h1>
+              <p className="font-light md:text-right">
+                Avlr gjør det lett å holde orden på avlen din. Vi gir deg
+                muligheten til å legge til, fjerne eller redigere detaljer om
+                dyrene dine på en enkel måte!
+              </p>
+              <div className="flex space-x-6 py-6 self-start md:self-end">
+                <Button className="bg-secondaryBrown" onClick={handleClick}>
+                  Se mer
+                  <IoChevronDownCircle className="text-backgroundWhite ml-3 text-lg" />
+                </Button>
+                <LogIn>
+                  Ny konto
+                  <IoPersonAdd className="text-backgroundWhite ml-3 text-lg" />
+                </LogIn>
+              </div>
+            </div>
+          </article>
         </section>
         <section
           ref={myRef}
@@ -116,7 +120,7 @@ const LandingPage = () => {
             </strong>
           </p>
         </section>
-      </div>
+      </main>
       <footer
         className="relative -bottom-16 text-backgroundWhite font-light bg-primaryGreen pt-4 pb-2 text-center rounded-t-xl mt-8"
         ref={footerRef}

@@ -39,6 +39,9 @@ module.exports = {
       outline: {
         secondaryBrown: ['1px solid #ba562c', '5px'],
       },
+      height: {
+        vh: '80vh',
+      },
     },
   },
   variants: {
