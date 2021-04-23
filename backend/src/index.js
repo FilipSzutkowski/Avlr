@@ -3,6 +3,7 @@ import treeData from './treeData';
 const app = express();
 app.set('port', process.env.PORT || 3001);
 app.use(express.json());
+//app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
 
 console.clear();
 
@@ -58,6 +59,10 @@ app.post('/newIndividual', (req, res) => {
 
   res.status(200).json(familyTrees);
 });
+
+// app.get('*', function (request, response) {
+//   response.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
+// });
 
 app.listen(app.get('port'), function () {
   console.log('server running', app.get('port'));

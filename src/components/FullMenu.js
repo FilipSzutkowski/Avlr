@@ -23,7 +23,7 @@ const FullMenu = ({ loading, trees }) => {
     );
   };
   return (
-    <main className="flex flex-col absolute overflow-y-hidden overflow-x-hidden w-full bg-backgroundWhite h-full top-16 rounded-t-xl shadow-logoShadow text-primaryGreen font-light pb-16">
+    <main className="flex flex-col absolute overflow-y-hidden overflow-x-hidden w-full bg-backgroundWhite h-full top-16 rounded-t-xl shadow-logoShadow text-primaryGreen font-light">
       <section className="flex items-center bg-backgroundWhite px-4 py-3 rounded-t-xl shadow-lg">
         <Link
           to={navigation.url}
@@ -39,7 +39,7 @@ const FullMenu = ({ loading, trees }) => {
         </Link>
         <p className="ml-3">{navigation.title}</p>
       </section>
-      <div className="h-full overflow-x-auto overflow-y-auto">
+      <div className="overflow-x-auto overflow-y-auto pb-16">
         <FamilyRoutes
           path={path}
           url={url}
