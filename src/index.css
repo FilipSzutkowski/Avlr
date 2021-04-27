@@ -46,6 +46,6 @@
 
 @layer components {
   .landingSection {
-    @apply shadow-sideMenuShadow px-4 py-6 mx-3 rounded-md;
+    @apply shadow-sideMenuShadow px-4 py-16 mx-3 rounded-md;
   }
 }

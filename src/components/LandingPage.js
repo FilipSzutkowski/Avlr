@@ -23,7 +23,7 @@ const LandingPage = () => {
   const handleClick = () => {
     executeScroll(myRef);
   };
-  const illustrationClasses = 'w-32 h-auto';
+  const illustrationClasses = 'w-32 md:w-48 h-auto';
 
   useEffect(() => {
     location.hash === '' && executeScroll();
@@ -61,14 +61,14 @@ const LandingPage = () => {
         </section>
         <section
           ref={myRef}
-          className="landingSection flex flex-col my-5 space-y-4"
+          className="landingSection flex flex-col my-5 space-y-4 md:items-center"
         >
           <article className="flex flex-col items-center pt-8">
             <FamiliesIllustration className={illustrationClasses} />
             <h1 className="text-xl text-primaryGreen font-semibold self-start mt-3">
               Opprett <span className="text-secondaryBrown">stamtavler</span>!
             </h1>
-            <p className="font-light self-start">
+            <p className="font-light self-start max-w-prose">
               Begynn med å opprette en ny stamtavle. Du kan selv velge hva du
               vil kalle den, og hvilken rase som skal bokføres.
             </p>
@@ -78,7 +78,7 @@ const LandingPage = () => {
             <h1 className="text-xl text-primaryGreen font-semibold self-start mt-3">
               Legg til <span className="text-secondaryBrown">individer</span>!
             </h1>
-            <p className="font-light self-start">
+            <p className="font-light self-start max-w-prose">
               Etter å ha opprettet en eller flere stamtavler, kan du legge til
               individer i en av de. Der kan du fylle ut detaljer og informasjon
               om individet, sånn som fødselsdato, farge eller
@@ -91,7 +91,7 @@ const LandingPage = () => {
               Beundre <span className="text-secondaryBrown">stamtreet</span>{' '}
               ditt!
             </h1>
-            <p className="font-light self-start">
+            <p className="font-light self-start max-w-prose">
               Deretter kan du visualisere dataen om avlen din i et stamtre
               visning! Der ser du den nærmeste familien til individet sammen med
               deres detaljer. Da har du laget en enkel oversikt over egenskapene
@@ -99,28 +99,31 @@ const LandingPage = () => {
             </p>
           </article>
         </section>
-        <section className="landingSection">
-          <h1 className="text-primaryGreen text-3xl text-center font-bold pb-4">
-            Litt om Avlr
-          </h1>
-          <p className="font-light">
-            Applikasjonen er i et <strong>teststadie</strong>, det vil si at det
-            ikke er sikkert dataen brukeren fører inn ikke kommer til å bli
-            fjernet. Det er derfor anbefalt å ikke utnytte verktøyet som den
-            eneste måten å lagre data om avlen din på. <br /> Vi anbefaler
-            allikevel å bruke applikasjonen, ettersom det er et nyttig verktøy!
-          </p>
-          <h1 className="text-secondaryBrown text-lg pt-3">Hva er Avlr?</h1>
-          <p className="font-light">
-            Avlr er en web basert applikasjon for å holde oversikt over
-            stambokføring. Den er utført som et bachelorprosjekt på
-            Multimediateknologi og Design studiet i Grimstad av Filip Piotr
-            Szutkowski. <br /> <br />
-            <strong>
-              Har du noen spørsmål eller problemer? Send gjerne mail til
-              filip99.ski@gmail.com
-            </strong>
-          </p>
+        <section className="landingSection flex flex-col md:items-center">
+          <article className="max-w-prose">
+            <h1 className="text-primaryGreen text-3xl font-bold pb-4">
+              Litt om Avlr
+            </h1>
+            <p className="font-light">
+              Applikasjonen er i et <strong>teststadie</strong>, det vil si at
+              det ikke er sikkert dataen brukeren fører inn ikke kommer til å
+              bli fjernet. Det er derfor anbefalt å ikke utnytte verktøyet som
+              den eneste måten å lagre data om avlen din på. <br /> Vi anbefaler
+              allikevel å bruke applikasjonen, ettersom det er et nyttig
+              verktøy!
+            </p>
+            <h1 className="text-secondaryBrown text-lg pt-3">Hva er Avlr?</h1>
+            <p className="font-light">
+              Avlr er en web basert applikasjon for å holde oversikt over
+              stambokføring. Den er utført som et bachelorprosjekt på
+              Multimediateknologi og Design studiet i Grimstad av Filip Piotr
+              Szutkowski. <br /> <br />
+              <strong>
+                Har du noen spørsmål eller problemer? Send gjerne mail til
+                filip99.ski@gmail.com
+              </strong>
+            </p>
+          </article>
         </section>
       </main>
       <footer

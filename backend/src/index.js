@@ -1,4 +1,5 @@
 import express from 'express';
+import db from 'db';
 import treeData from './treeData';
 const app = express();
 app.set('port', process.env.PORT || 3001);
