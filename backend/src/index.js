@@ -1,5 +1,5 @@
 import express from 'express';
-import db from 'db';
+import db from './db/index';
 import treeData from './treeData';
 const app = express();
 app.set('port', process.env.PORT || 3001);
@@ -10,6 +10,16 @@ console.clear();
 
 let familyTrees = [{ id: 0, name: 'noe', race: 'XDDD', treeData: [] }];
 console.log(familyTrees);
+app.get('/', (req, response) => {
+  db.query('SELECT * FROM test', null, (err, res) => {
+    if (err) {
+      response.send(err);
+      return;
+    }
+    response.send(res.rows[0]);
+    return;
+  });
+});
 
 app.get('/getFamilytrees', (req, res) => {
   res.status(200).json(familyTrees);
