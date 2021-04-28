@@ -10,35 +10,34 @@ import Loading from './utilities/Loading';
 import { useAuth0 } from '@auth0/auth0-react';
 import TreeContext from './TreeContext';
 import LandingPage from './LandingPage';
+import { GETtrees } from './APICalls';
 
 const App = () => {
   const [familyTrees, setFamilyTrees] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { isAuthenticated, isLoading, user } = useAuth0();
+  const {
+    isAuthenticated,
+    isLoading,
+    user,
+    getAccessTokenSilently,
+  } = useAuth0();
   console.log(
     `Auth0 auth: ${isAuthenticated}, Auth0 loading: ${isLoading}, State loading: ${loading}`
   );
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const res = await fetch('/getFamilyTrees');
-        const data = await res.json();
-
-        console.log('inside fetch');
-        setFamilyTrees(data);
-        setLoading(false);
-      } catch (err) {
-        setFamilyTrees(err);
-        return err;
-      }
+      const accessToken = await getAccessTokenSilently();
+      const trees = await GETtrees(accessToken);
+      setFamilyTrees(trees);
+      setLoading(false);
     };
 
     if (isLoading && !loading) setLoading(true);
     if (!isAuthenticated && !isLoading) setLoading(false);
 
     isAuthenticated && fetchData();
-  }, [isLoading, isAuthenticated, loading]);
+  }, [isLoading, isAuthenticated, loading, getAccessTokenSilently]);
 
   return (
     <div className="text-neutralDarkBrown w-full h-full">

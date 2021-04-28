@@ -17,6 +17,7 @@ ReactDOM.render(
       domain={process.env.REACT_APP_auth0_domain}
       clientId={process.env.REACT_APP_auth0_clientID}
       redirectUri={window.location.origin}
+      audience="http://localhost:3001"
       onRedirectCallback={onRedirectCallback}
     >
       <Router history={history}>

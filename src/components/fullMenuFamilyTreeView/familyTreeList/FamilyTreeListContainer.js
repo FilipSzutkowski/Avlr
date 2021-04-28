@@ -5,6 +5,7 @@ import { useContext, useState } from 'react';
 import TreeContext from '../../TreeContext';
 import { useForm } from '../useForm';
 import { POSTnewFamilyTree } from '../../APICalls';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const UserFamilyTrees = ({ url, useNavigation }) => {
   const [addingTree, setAddingTree] = useState(false);
@@ -12,6 +13,7 @@ const UserFamilyTrees = ({ url, useNavigation }) => {
   const [title, setTitle] = useState('Stamtavler');
   const [error, setError] = useState(null);
   const { familyTrees, setFamilyTrees } = useContext(TreeContext);
+  const { getAccessTokenSilently } = useAuth0();
   const handleClick = () => {
     setTitle('Ny stamtavle');
     setAddingTree(true);
@@ -19,8 +21,9 @@ const UserFamilyTrees = ({ url, useNavigation }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const accessToken = await getAccessTokenSilently();
     const newFamilyTree = { ...formData };
-    const result = await POSTnewFamilyTree(newFamilyTree);
+    const result = await POSTnewFamilyTree(newFamilyTree, accessToken);
     if (result instanceof Error) {
       setError(result);
       return;
