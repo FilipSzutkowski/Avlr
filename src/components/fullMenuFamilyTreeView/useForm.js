@@ -9,9 +9,8 @@ export const useForm = (initialValue) => {
     if (name === 'father' || name === 'mother') {
       setFormData({
         ...formData,
-        parents: [...formData.parents, { id: value, type: 'blood' }],
+        parents: [...formData.parents, { id: parseInt(value), type: 'blood' }],
       });
-
       return;
     }
 

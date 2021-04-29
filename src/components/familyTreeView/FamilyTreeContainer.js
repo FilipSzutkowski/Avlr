@@ -3,11 +3,14 @@ import Loading from '../utilities/Loading';
 import Button from '../utilities/Button';
 import { IoChevronBackCircle } from 'react-icons/io5';
 import { Link, useParams } from 'react-router-dom';
+import { useContext } from 'react';
+import TreeContext from '../TreeContext';
 
-const FamilyTreeContainer = ({ loading, trees }) => {
+const FamilyTreeContainer = ({ loading }) => {
+  const { familyTrees } = useContext(TreeContext);
   const { treeIndex, individIndex } = useParams();
-  const { treeData: nodes, name } = !loading && trees[treeIndex];
-  const { id: rootId, earmark } = !loading && nodes[individIndex];
+  const { treeData: nodes, name } = !loading && familyTrees[treeIndex];
+  const { id: rootId, regNr } = !loading && nodes[individIndex];
   return loading ? (
     <Loading className="relative top-16" />
   ) : (
@@ -19,7 +22,7 @@ const FamilyTreeContainer = ({ loading, trees }) => {
       >
         <Button
           className="bg-backgroundWhite text-primaryGreen py-3 px-6 shadow-sideMenuShadow rounded-l-none"
-          title={`${earmark} i ${name}`}
+          title={`${regNr} i ${name}`}
         >
           <IoChevronBackCircle className="text-secondaryBrown ml-12 text-2xl" />
         </Button>

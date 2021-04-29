@@ -2,6 +2,7 @@ import ReactFamilyTree from 'react-family-tree';
 import FamilyNode from './FamilyNode';
 
 const FamilyTree = ({ rootId, nodes, WIDTH, HEIGHT }) => {
+  console.log(nodes);
   return (
     <ReactFamilyTree
       color="#3a6351"

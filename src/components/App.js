@@ -56,7 +56,9 @@ const App = () => {
             </TreeContext.Provider>
           </ProtectedRoute>
           <ProtectedRoute path="/tree/:treeIndex/:individIndex">
-            <FamilyTreeContainer trees={familyTrees} loading={loading} />
+            <TreeContext.Provider value={{ familyTrees }}>
+              <FamilyTreeContainer loading={loading} />
+            </TreeContext.Provider>
           </ProtectedRoute>
           <Route path="*">
             {loading ? (

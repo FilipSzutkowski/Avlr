@@ -9,7 +9,7 @@ import TreeContext from '../../TreeContext';
 const IndividualDetails = ({ useNavigation, url }) => {
   const { familyTrees, setFamilyTrees } = useContext(TreeContext);
   const { treeIndex, individIndex } = useParams();
-  const { earmark, regNr, race, birthday, color, poeng } = familyTrees[
+  const { earmark, regNr, race, birthday, color, poeng, about } = familyTrees[
     treeIndex
   ].treeData[individIndex];
   useNavigation(`${url}/${treeIndex}`, regNr, false);
@@ -59,7 +59,7 @@ const IndividualDetails = ({ useNavigation, url }) => {
         </div>
         <DescriptionItem
           title="Beskrivelse:"
-          description={'Veldig sprek kanin, gode gener, god stamina'}
+          description={about ?? 'Ikke oppgitt'}
         />
       </section>
     </article>

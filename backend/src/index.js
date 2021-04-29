@@ -1,29 +1,46 @@
 import express from 'express';
 import db from './db/index';
 import treeData from './treeData';
-import jwt from 'express-jwt';
-import jwtAuthz from 'express-jwt-authz';
-import jwksRsa from 'jwks-rsa';
+import { checkJwt } from './middleware/verifyAccessToken';
 
 const app = express();
-const checkJwt = jwt({
-  secret: jwksRsa.expressJwtSecret({
-    cache: true,
-    rateLimit: true,
-    jwksRequestsPerMinute: 5,
-    jwksUri: `https://avlr.eu.auth0.com/.well-known/jwks.json`,
-  }),
-
-  audience: 'http://localhost:3001',
-  issuer: [`https://avlr.eu.auth0.com/`],
-  algorithms: ['RS256'],
-});
-
 app.set('port', process.env.PORT || 3001);
 app.use(express.json());
 //app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
 
-let familyTrees = [{ id: 0, name: 'noe', race: 'XDDD', treeData: [] }];
+let parent1 = {
+  id: 1,
+  regNr: 'Parent 1',
+  gender: 'male',
+  parents: [],
+  siblings: [],
+  spouses: [],
+  children: [{ id: 3, type: 'blood' }],
+};
+let parent2 = {
+  id: 2,
+  regNr: 'Parent 2',
+  gender: 'female',
+  parents: [],
+  siblings: [],
+  spouses: [],
+  children: [{ id: 3, type: 'blood' }],
+};
+let child = {
+  id: 3,
+  regNr: 'Parent 3',
+  gender: 'male',
+  parents: [
+    { id: 1, type: 'blood' },
+    { id: 2, type: 'blood' },
+  ],
+  siblings: [],
+  spouses: [],
+  children: [],
+};
+let familyTrees = [
+  { id: 0, name: 'noe', race: 'XDDD', treeData: [parent1, parent2, child] },
+];
 console.log(familyTrees);
 app.get('/', (req, response) => {
   db.query('SELECT * FROM test', null, (err, res) => {
@@ -34,14 +51,6 @@ app.get('/', (req, response) => {
     response.send(res.rows[0]);
     return;
   });
-});
-
-app.get('/protected', checkJwt, (req, res) => {
-  res.json({ message: 'You need to be authed to see this.' });
-});
-
-app.get('/unProtected', (req, res) => {
-  res.json({ message: 'You dont need to be authed to see this.' });
 });
 
 app.get('/getFamilytrees', checkJwt, (req, res) => {
@@ -66,7 +75,6 @@ app.post('/newIndividual', checkJwt, (req, res) => {
   const oldTree = { ...familyTrees[oldTreeIndex] };
   const oldTreeTreeData = oldTree.treeData;
   let parents = newIndividual.parents.length > 0 ? newIndividual.parents : null;
-
   if (parents) {
     const parentsIndexes = parents.map((parent) => {
       return oldTreeTreeData.findIndex(
@@ -75,22 +83,14 @@ app.post('/newIndividual', checkJwt, (req, res) => {
     });
 
     parents = parentsIndexes;
-    console.log(`parentIndexes: ${parentsIndexes}`);
   }
-
-  console.log(oldTree);
-  console.log(oldTreeTreeData);
-
   familyTrees[oldTreeIndex] = {
     ...oldTree,
     treeData: [
       ...oldTreeTreeData,
-      { id: oldTreeTreeData.length + 1, ...newIndividual },
+      { id: parseInt(oldTreeTreeData.length + 1), ...newIndividual },
     ],
   };
-
-  console.log(familyTrees);
-
   res.status(200).json(familyTrees);
 });
 
