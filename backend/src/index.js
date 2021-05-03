@@ -1,47 +1,17 @@
 import express from 'express';
+import path from 'path';
 import db from './db/index';
 import treeData from './treeData';
 import { checkJwt } from './middleware/verifyAccessToken';
+import TreesServices from './services/TreesServices';
+import userIDFromHeader from './utilities/userIDFromHeader';
 
 const app = express();
+const TreesService = new TreesServices();
 app.set('port', process.env.PORT || 3001);
 app.use(express.json());
 //app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
 
-let parent1 = {
-  id: 1,
-  regNr: 'Parent 1',
-  gender: 'male',
-  parents: [],
-  siblings: [],
-  spouses: [],
-  children: [{ id: 3, type: 'blood' }],
-};
-let parent2 = {
-  id: 2,
-  regNr: 'Parent 2',
-  gender: 'female',
-  parents: [],
-  siblings: [],
-  spouses: [],
-  children: [{ id: 3, type: 'blood' }],
-};
-let child = {
-  id: 3,
-  regNr: 'Parent 3',
-  gender: 'male',
-  parents: [
-    { id: 1, type: 'blood' },
-    { id: 2, type: 'blood' },
-  ],
-  siblings: [],
-  spouses: [],
-  children: [],
-};
-let familyTrees = [
-  { id: 0, name: 'noe', race: 'XDDD', treeData: [parent1, parent2, child] },
-];
-console.log(familyTrees);
 app.get('/', (req, response) => {
   db.query('SELECT * FROM test', null, (err, res) => {
     if (err) {
@@ -53,44 +23,29 @@ app.get('/', (req, response) => {
   });
 });
 
-app.get('/getFamilytrees', checkJwt, (req, res) => {
+app.get('/getFamilytrees', checkJwt, async (req, res) => {
+  const userId = userIDFromHeader(req.headers.userid);
+  const familyTrees = await TreesService.GetTrees(userId);
+  if (familyTrees instanceof Error) {
+    res.status(500).json(familyTrees);
+  }
   res.status(200).json(familyTrees);
 });
 
-app.post('/newTree', checkJwt, (req, res) => {
+app.post('/newTree', checkJwt, async (req, res) => {
   const newTree = req.body.tree;
-  const newFamilyTrees = [
-    ...familyTrees,
-    { id: familyTrees.length + 1, ...newTree, treeData: [] },
-  ];
-  console.log(newTree);
-  familyTrees = newFamilyTrees;
+  const userId = userIDFromHeader(req.headers.userid);
+  const familyTrees = await TreesService.NewTree(userId, newTree);
+  if (familyTrees instanceof Error) {
+    res.status(500).json(familyTrees);
+  }
   res.status(200).json(familyTrees);
 });
 
-app.post('/newIndividual', checkJwt, (req, res) => {
+app.post('/newIndividual', checkJwt, async (req, res) => {
   const newIndividual = req.body.individual;
   const treeId = req.body.id;
-  const oldTreeIndex = familyTrees.findIndex((tree) => tree.id == treeId);
-  const oldTree = { ...familyTrees[oldTreeIndex] };
-  const oldTreeTreeData = oldTree.treeData;
-  let parents = newIndividual.parents.length > 0 ? newIndividual.parents : null;
-  if (parents) {
-    const parentsIndexes = parents.map((parent) => {
-      return oldTreeTreeData.findIndex(
-        (individual) => individual.id == parent.id
-      );
-    });
-
-    parents = parentsIndexes;
-  }
-  familyTrees[oldTreeIndex] = {
-    ...oldTree,
-    treeData: [
-      ...oldTreeTreeData,
-      { id: parseInt(oldTreeTreeData.length + 1), ...newIndividual },
-    ],
-  };
+  const familyTrees = await TreesService.NewIndividual(newIndividual, treeId);
   res.status(200).json(familyTrees);
 });
 

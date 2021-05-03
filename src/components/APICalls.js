@@ -1,4 +1,4 @@
-const boilerPlate = async (objToPost, method, url, accessToken) => {
+const boilerPlate = async (objToPost, method, url, accessToken, userID) => {
   try {
     const config =
       method !== 'GET'
@@ -8,6 +8,7 @@ const boilerPlate = async (objToPost, method, url, accessToken) => {
             headers: {
               'Content-Type': 'application/json',
               Authorization: `Bearer ${accessToken}`,
+              UserID: userID,
             },
           }
         : {
@@ -15,6 +16,7 @@ const boilerPlate = async (objToPost, method, url, accessToken) => {
             headers: {
               'Content-Type': 'application/json',
               Authorization: `Bearer ${accessToken}`,
+              UserID: userID,
             },
           };
     const res = await fetch(url, config);
@@ -28,12 +30,13 @@ const boilerPlate = async (objToPost, method, url, accessToken) => {
   }
 };
 
-export const POSTnewFamilyTree = async (newFamilyTree, accessToken) => {
+export const POSTnewFamilyTree = async (newFamilyTree, accessToken, userID) => {
   const result = await boilerPlate(
     { tree: newFamilyTree },
     'POST',
     '/newTree',
-    accessToken
+    accessToken,
+    userID
   );
   return result;
 };
@@ -48,7 +51,13 @@ export const POSTnewIndividual = async (newIndividual, treeId, accessToken) => {
   return result;
 };
 
-export const GETtrees = async (accessToken) => {
-  const result = await boilerPlate(null, 'GET', '/getFamilytrees', accessToken);
+export const GETtrees = async (accessToken, userID) => {
+  const result = await boilerPlate(
+    null,
+    'GET',
+    '/getFamilytrees',
+    accessToken,
+    userID
+  );
   return result;
 };

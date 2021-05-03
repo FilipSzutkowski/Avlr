@@ -28,7 +28,7 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       const accessToken = await getAccessTokenSilently();
-      const trees = await GETtrees(accessToken);
+      const trees = await GETtrees(accessToken, user.sub);
       setFamilyTrees(trees);
       setLoading(false);
     };
@@ -37,7 +37,7 @@ const App = () => {
     if (!isAuthenticated && !isLoading) setLoading(false);
 
     isAuthenticated && fetchData();
-  }, [isLoading, isAuthenticated, loading, getAccessTokenSilently]);
+  }, [isLoading, isAuthenticated, loading, getAccessTokenSilently, user]);
 
   return (
     <div className="text-neutralDarkBrown w-full h-full">

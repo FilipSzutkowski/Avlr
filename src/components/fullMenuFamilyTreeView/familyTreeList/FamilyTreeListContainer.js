@@ -13,7 +13,7 @@ const UserFamilyTrees = ({ url, useNavigation }) => {
   const [title, setTitle] = useState('Stamtavler');
   const [error, setError] = useState(null);
   const { familyTrees, setFamilyTrees } = useContext(TreeContext);
-  const { getAccessTokenSilently } = useAuth0();
+  const { getAccessTokenSilently, user } = useAuth0();
   const handleClick = () => {
     setTitle('Ny stamtavle');
     setAddingTree(true);
@@ -23,7 +23,11 @@ const UserFamilyTrees = ({ url, useNavigation }) => {
     e.preventDefault();
     const accessToken = await getAccessTokenSilently();
     const newFamilyTree = { ...formData };
-    const result = await POSTnewFamilyTree(newFamilyTree, accessToken);
+    const result = await POSTnewFamilyTree(
+      newFamilyTree,
+      accessToken,
+      user.sub
+    );
     if (result instanceof Error) {
       setError(result);
       return;
