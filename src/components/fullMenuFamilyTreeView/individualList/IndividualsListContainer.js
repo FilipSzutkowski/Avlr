@@ -11,7 +11,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 const UserIndividuals = ({ url, useNavigation }) => {
   const { familyTrees, setFamilyTrees } = useContext(TreeContext);
-  const { getAccessTokenSilently } = useAuth0();
+  const { getAccessTokenSilently, user } = useAuth0();
   const [addingIndivid, setAddingIndivid] = useState(false);
   const [previousUrl, setPreviousUrl] = useState(url);
   const [formData, handleChange] = useForm({
@@ -34,7 +34,12 @@ const UserIndividuals = ({ url, useNavigation }) => {
     e.preventDefault();
     const accessToken = await getAccessTokenSilently();
     const newIndividual = { ...formData }; //Fyll ut alt som trenges for familyTree biblioteket
-    const result = await POSTnewIndividual(newIndividual, treeId, accessToken);
+    const result = await POSTnewIndividual(
+      newIndividual,
+      treeId,
+      accessToken,
+      user.sub
+    );
     if (result instanceof Error) {
       setError(result);
       return;

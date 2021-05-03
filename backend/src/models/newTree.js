@@ -8,7 +8,6 @@ export const updateTrees = async (userId, newTree) => {
         'UPDATE user_data SET trees = $1 WHERE user_id = $2 RETURNING trees',
         [familyTrees, userId]
       );
-      console.log(familyTrees);
       return result.rows[0];
     } catch (err) {
       console.log(err);

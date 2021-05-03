@@ -41,12 +41,18 @@ export const POSTnewFamilyTree = async (newFamilyTree, accessToken, userID) => {
   return result;
 };
 
-export const POSTnewIndividual = async (newIndividual, treeId, accessToken) => {
+export const POSTnewIndividual = async (
+  newIndividual,
+  treeId,
+  accessToken,
+  userID
+) => {
   const result = await boilerPlate(
     { individual: newIndividual, id: treeId },
     'POST',
     '/newIndividual',
-    accessToken
+    accessToken,
+    userID
   );
   return result;
 };

@@ -45,7 +45,15 @@ app.post('/newTree', checkJwt, async (req, res) => {
 app.post('/newIndividual', checkJwt, async (req, res) => {
   const newIndividual = req.body.individual;
   const treeId = req.body.id;
-  const familyTrees = await TreesService.NewIndividual(newIndividual, treeId);
+  const userId = userIDFromHeader(req.headers.userid);
+  const familyTrees = await TreesService.NewIndividual(
+    newIndividual,
+    treeId,
+    userId
+  );
+  if (familyTrees instanceof Error) {
+    res.status(500).json(familyTrees);
+  }
   res.status(200).json(familyTrees);
 });
 
