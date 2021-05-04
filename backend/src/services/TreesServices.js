@@ -55,6 +55,7 @@ export default class TreesService {
     const oldTreeIndex = familyTrees.findIndex((tree) => tree.id == treeId);
     const oldTree = { ...familyTrees[oldTreeIndex] };
     const oldTreeTreeData = oldTree.treeData;
+    const newIndividualId = parseInt(oldTreeTreeData.length + 1);
     let parents =
       newIndividual.parents.length > 0 ? newIndividual.parents : null;
     if (parents) {
@@ -64,13 +65,24 @@ export default class TreesService {
         );
       });
 
-      parents = parentsIndexes;
+      parentsIndexes.forEach((e, i) => {
+        oldTreeTreeData[e].children = [
+          ...oldTreeTreeData[e].children,
+          { id: newIndividualId, type: 'blood' },
+        ];
+      });
     }
+
+    console.log(`parents: ${parents}`);
     familyTrees[oldTreeIndex] = {
       ...oldTree,
       treeData: [
         ...oldTreeTreeData,
-        { id: parseInt(oldTreeTreeData.length + 1), ...newIndividual },
+        {
+          id: newIndividualId,
+          race: oldTree.race,
+          ...newIndividual,
+        },
       ],
     };
     const newTrees = await updateTrees(userId, familyTrees);

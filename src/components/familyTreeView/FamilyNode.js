@@ -8,7 +8,7 @@ const FamilyNode = ({ node, style, isRoot }) => {
           isRoot && 'border-2'
         }`}
       >
-        <h1>{node.id}</h1>
+        <h1>{node.regNr}</h1>
         <p>{node.gender}</p>
         <p>{node.birthday}</p>
         <p>{node.color}</p>
