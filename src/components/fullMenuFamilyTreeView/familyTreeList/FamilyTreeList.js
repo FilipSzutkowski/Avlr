@@ -5,10 +5,10 @@ const FamilyTreeList = ({ trees, url }) => {
       <Link
         to={`${url}/${index}`}
         key={id}
-        className="flex-col py-3 justify-between hover:bg-secondaryBrown hover:text-backgroundWhite"
+        className="group flex-col py-3 justify-between hover:bg-secondaryBrown hover:text-backgroundWhite"
       >
         <dt className="mx-3 text-lg">{name ?? 'Stamtavle uten navn'}</dt>
-        <dd className="mx-3 text-sm opacity-80 text-secondaryBrown">
+        <dd className="mx-3 text-sm opacity-80 text-secondaryBrown group-hover:text-backgroundWhite">
           {race ?? 'Stamtavle uten rase'}
         </dd>
       </Link>

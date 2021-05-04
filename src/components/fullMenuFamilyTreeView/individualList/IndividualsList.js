@@ -6,13 +6,18 @@ const IndividualsList = ({ tree, url, treeIndex }) => {
       <Link
         to={`${url}/${treeIndex}/${index}`}
         key={id}
-        className="flex flex-col py-3 text-lg hover:bg-secondaryBrown hover:text-backgroundWhite"
+        className="group flex flex-col py-3 text-lg hover:bg-secondaryBrown hover:text-backgroundWhite"
       >
         <dt className="mx-3 flex items-center">
           {regNr ?? 'Ikke noe registrerings nummer'}{' '}
-          <GenderIcon gender={gender} className="ml-2" />
+          <GenderIcon
+            gender={gender}
+            className="ml-2 group-hover:text-backgroundWhite"
+          />
         </dt>
-        <dd className="mx-3 text-secondaryBrown text-sm">{color}</dd>
+        <dd className="mx-3 text-secondaryBrown text-sm group-hover:text-backgroundWhite">
+          {color}
+        </dd>
       </Link>
     ))
   ) : (
