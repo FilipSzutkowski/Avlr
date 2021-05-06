@@ -56,7 +56,7 @@ export default class TreesService {
     const oldTree = { ...familyTrees[oldTreeIndex] };
     const oldTreeTreeData = oldTree.treeData;
     const newIndividualId = parseInt(oldTreeTreeData.length + 1);
-    let parents =
+    const parents =
       newIndividual.parents.length > 0 ? newIndividual.parents : null;
     if (parents) {
       const parentsIndexes = parents.map((parent) => {
@@ -69,6 +69,19 @@ export default class TreesService {
         oldTreeTreeData[e].children = [
           ...oldTreeTreeData[e].children,
           { id: newIndividualId, type: 'blood' },
+        ];
+
+        if (i === 0) {
+          oldTreeTreeData[e].spouses = [
+            ...oldTreeTreeData[e].spouses,
+            { ...parents[1] },
+          ];
+          return;
+        }
+
+        oldTreeTreeData[e].spouses = [
+          ...oldTreeTreeData[e].spouses,
+          { ...parents[0] },
         ];
       });
     }

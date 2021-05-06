@@ -2,14 +2,35 @@ import { useState } from 'react';
 
 export const useForm = (initialValue) => {
   const [formData, setFormData] = useState(initialValue);
+  // const [parents, setParents] = useState({ father: false, mother: false });
+  const [parents, setParents] = useState({
+    mother: { id: '' },
+    father: { id: '' },
+  });
   const handleChange = (e) => {
     const target = e.target;
     const { value, name } = target;
 
     if (name === 'father' || name === 'mother') {
+      let parentArray = [];
+      let parent = {};
+      if (name === 'mother') {
+        parent = { id: value, type: 'blood' };
+        parentArray = [parent, parents.father];
+        setParents({ ...parents, mother: parent });
+      }
+
+      if (name === 'father') {
+        parent = { id: value, type: 'blood' };
+        parentArray = [parent, parents.mother];
+        setParents({ ...parents, father: parent });
+      }
+
+      const filteredArray = parentArray.filter((parent) => parent.id !== '');
+
       setFormData({
         ...formData,
-        parents: [...formData.parents, { id: parseInt(value), type: 'blood' }],
+        parents: filteredArray,
       });
       return;
     }
