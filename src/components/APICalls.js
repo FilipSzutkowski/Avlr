@@ -67,3 +67,30 @@ export const GETtrees = async (accessToken, userID) => {
   );
   return result;
 };
+
+export const DELETEtree = async (treeIndex, accessToken, userID) => {
+  const result = await boilerPlate(
+    { treeIndex: treeIndex },
+    'DELETE',
+    '/deleteTree',
+    accessToken,
+    userID
+  );
+  return result;
+};
+
+export const EDITtree = async (
+  newFamilyTree,
+  treeIndex,
+  accessToken,
+  userID
+) => {
+  const result = await boilerPlate(
+    { treeIndex: treeIndex, tree: newFamilyTree },
+    'POST',
+    '/editTree',
+    accessToken,
+    userID
+  );
+  return result;
+};

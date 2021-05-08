@@ -20,10 +20,8 @@ const FamilyTreeContainer = ({ loading }) => {
         to={`/mine_stamtavler/${treeIndex}/${individIndex}`}
         className="fixed top-16"
       >
-        <Button
-          className="bg-backgroundWhite text-primaryGreen py-3 px-6 shadow-sideMenuShadow rounded-l-none"
-          title={`${regNr} i ${name}`}
-        >
+        <Button className="bg-backgroundWhite text-primaryGreen py-3 px-6 shadow-sideMenuShadow rounded-l-none">
+          {`${regNr} i ${name}`}
           <IoChevronBackCircle className="text-secondaryBrown ml-12 text-2xl" />
         </Button>
       </Link>

@@ -7,7 +7,7 @@ import { useContext } from 'react';
 import TreeContext from '../../TreeContext';
 
 const IndividualDetails = ({ useNavigation, url }) => {
-  const { familyTrees, setFamilyTrees } = useContext(TreeContext);
+  const { familyTrees } = useContext(TreeContext);
   const { treeIndex, individIndex } = useParams();
   const { earmark, regNr, race, birthday, color, points, about } = familyTrees[
     treeIndex
@@ -26,7 +26,8 @@ const IndividualDetails = ({ useNavigation, url }) => {
             to={`/tree/${treeIndex}/${individIndex}`}
             className="self-center my-4"
           >
-            <Button title="Se i stamtreet">
+            <Button>
+              Se i stamtreet
               <IoChevronForwardCircle className="text-secondaryBrown ml-5 text-lg bg-backgroundWhite rounded-full" />
             </Button>
           </Link>

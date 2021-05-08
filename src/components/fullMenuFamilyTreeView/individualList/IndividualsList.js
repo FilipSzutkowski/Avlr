@@ -5,10 +5,9 @@ import GenderIcon from '../../utilities/GenderIcon';
 const IndividualsList = ({ tree, url, treeIndex }) => {
   return tree.length > 0 ? (
     tree.map(({ id, regNr, color, gender }, index) => (
-      <section className="group flex hover:bg-secondaryBrown">
+      <section className="group flex hover:bg-secondaryBrown" key={id}>
         <Link
           to={`${url}/${treeIndex}/${index}`}
-          key={id}
           className="flex-grow flex flex-col py-3 text-lg hover:text-backgroundWhite group-hover:text-backgroundWhite"
         >
           <dt className="mx-3 flex items-center">

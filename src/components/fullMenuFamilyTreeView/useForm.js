@@ -2,7 +2,6 @@ import { useState } from 'react';
 
 export const useForm = (initialValue) => {
   const [formData, setFormData] = useState(initialValue);
-  // const [parents, setParents] = useState({ father: false, mother: false });
   const [parents, setParents] = useState({
     mother: { id: '' },
     father: { id: '' },

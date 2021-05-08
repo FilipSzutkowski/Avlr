@@ -1,40 +1,6 @@
 import { getTrees } from '../models/getTrees';
 import { updateTrees } from '../models/newTree';
 
-// let parent1 = {
-//   id: 1,
-//   regNr: 'Parent 1',
-//   gender: 'male',
-//   parents: [],
-//   siblings: [],
-//   spouses: [],
-//   children: [{ id: 3, type: 'blood' }],
-// };
-// let parent2 = {
-//   id: 2,
-//   regNr: 'Parent 2',
-//   gender: 'female',
-//   parents: [],
-//   siblings: [],
-//   spouses: [],
-//   children: [{ id: 3, type: 'blood' }],
-// };
-// let child = {
-//   id: 3,
-//   regNr: 'Parent 3',
-//   gender: 'male',
-//   parents: [
-//     { id: 1, type: 'blood' },
-//     { id: 2, type: 'blood' },
-//   ],
-//   siblings: [],
-//   spouses: [],
-//   children: [],
-// };
-// let familyTrees = [
-//   { id: 0, name: 'noe', race: 'XDDD', treeData: [parent1, parent2, child] },
-// ];
-
 export default class TreesService {
   async GetTrees(userId) {
     const familyTrees = await getTrees(userId);
@@ -100,6 +66,26 @@ export default class TreesService {
     };
     const newTrees = await updateTrees(userId, familyTrees);
 
+    return newTrees;
+  }
+
+  async DeleteTree(treeIndex, userId) {
+    const familyTrees = await getTrees(userId);
+    const filteredTrees = familyTrees.filter((tree, index) => {
+      return index !== parseInt(treeIndex);
+    });
+    console.log(filteredTrees);
+    const newTrees = await updateTrees(userId, filteredTrees);
+    return newTrees;
+  }
+
+  async EditTree(familyTree, treeIndex, userId) {
+    const familyTrees = await getTrees(userId);
+    const oldTreeData = familyTrees[treeIndex].treeData;
+    const newTree = { ...familyTree, treeData: oldTreeData };
+    familyTrees[treeIndex] = newTree;
+
+    const newTrees = await updateTrees(userId, familyTrees);
     return newTrees;
   }
 }
