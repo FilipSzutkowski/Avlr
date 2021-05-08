@@ -15,13 +15,13 @@ export const useForm = (initialValue) => {
       let parentArray = [];
       let parent = {};
       if (name === 'mother') {
-        parent = { id: value, type: 'blood' };
+        parent = { id: parseInt(value), type: 'blood' };
         parentArray = [parent, parents.father];
         setParents({ ...parents, mother: parent });
       }
 
       if (name === 'father') {
-        parent = { id: value, type: 'blood' };
+        parent = { id: parseInt(value), type: 'blood' };
         parentArray = [parent, parents.mother];
         setParents({ ...parents, father: parent });
       }

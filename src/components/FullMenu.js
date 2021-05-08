@@ -33,8 +33,11 @@ const FullMenu = ({ loading, trees }) => {
             disabled={navigation.previousBtnHidden}
           >
             <Button
-              className="bg-backgroundWhite shadow-none px-0"
+              className={`bg-backgroundWhite shadow-none px-0 ${
+                !navigation.previousBtnHidden ? 'menuIcon' : null
+              }`}
               disabled={navigation.previousBtnHidden}
+              title={!navigation.previousBtnHidden ? 'Gå tilbake' : null}
             >
               <IoChevronBackCircle className="text-secondaryBrown text-xl" />
             </Button>

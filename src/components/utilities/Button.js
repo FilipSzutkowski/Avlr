@@ -4,8 +4,8 @@ const Button = ({ children, title, className, onClick, disabled }) => {
       className={className ?? null}
       onClick={onClick ?? null}
       disabled={disabled ?? null}
+      title={title}
     >
-      {title && <span>{title}</span>}
       {children ?? null}
     </button>
   );

@@ -12,13 +12,13 @@ const FamilyTreeContainer = ({ loading }) => {
   const { treeData: nodes, name } = !loading && familyTrees[treeIndex];
   const { id: rootId, regNr } = !loading && nodes[individIndex];
   return loading ? (
-    <Loading className="relative top-16" />
+    <Loading className="relative top-24" />
   ) : (
-    <article className="relative overflow-auto top-16">
+    <article className="relative overflow-auto top-32">
       <FamilyTree nodes={nodes} rootId={rootId} WIDTH={200} HEIGHT={150} />
       <Link
         to={`/mine_stamtavler/${treeIndex}/${individIndex}`}
-        className="fixed bottom-10"
+        className="fixed top-16"
       >
         <Button
           className="bg-backgroundWhite text-primaryGreen py-3 px-6 shadow-sideMenuShadow rounded-l-none"

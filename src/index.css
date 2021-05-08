@@ -22,7 +22,7 @@
   }
 
   button {
-    @apply flex items-center py-2 px-3 bg-primaryGreen font-light text-backgroundWhite rounded-lg shadow-lg focus:outline-secondaryBrown;
+    @apply flex items-center py-2 px-3 bg-primaryGreen font-light text-backgroundWhite rounded-lg shadow-lg focus:outline-secondaryBrown transition-transform duration-300 ease-in-out;
   }
 
   input {
@@ -47,5 +47,9 @@
 @layer components {
   .landingSection {
     @apply shadow-sideMenuShadow px-4 py-16 mx-3 rounded-md;
+  }
+
+  .menuIcon {
+    @apply transform focus:scale-125 hover:scale-125;
   }
 }
