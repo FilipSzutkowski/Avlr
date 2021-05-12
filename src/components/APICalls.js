@@ -79,6 +79,26 @@ export const DELETEtree = async (treeIndex, accessToken, userID) => {
   return result;
 };
 
+export const DELETEindividual = async (
+  treeIndex,
+  individIndex,
+  accessToken,
+  userID
+) => {
+  const result = await boilerPlate(
+    {
+      treeIndex: treeIndex,
+      individIndex: individIndex,
+    },
+    'DELETE',
+    '/deleteIndividual',
+    accessToken,
+    userID
+  );
+
+  return result;
+};
+
 export const EDITtree = async (
   newFamilyTree,
   treeIndex,
@@ -89,6 +109,27 @@ export const EDITtree = async (
     { treeIndex: treeIndex, tree: newFamilyTree },
     'POST',
     '/editTree',
+    accessToken,
+    userID
+  );
+  return result;
+};
+
+export const EDITIndivid = async (
+  newIndividual,
+  individIndex,
+  treeIndex,
+  accessToken,
+  userID
+) => {
+  const result = await boilerPlate(
+    {
+      treeIndex: treeIndex,
+      editedIndividual: newIndividual,
+      individIndex: individIndex,
+    },
+    'POST',
+    '/editIndivid',
     accessToken,
     userID
   );

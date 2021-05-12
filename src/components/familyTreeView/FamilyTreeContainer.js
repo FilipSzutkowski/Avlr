@@ -14,8 +14,8 @@ const FamilyTreeContainer = ({ loading }) => {
   return loading ? (
     <Loading className="relative top-24" />
   ) : (
-    <article className="relative overflow-auto top-32">
-      <FamilyTree nodes={nodes} rootId={rootId} WIDTH={200} HEIGHT={150} />
+    <article className="relative flex flex-col overflow-auto top-32">
+      <FamilyTree nodes={nodes} rootId={rootId} WIDTH={230} HEIGHT={200} />
       <Link
         to={`/mine_stamtavler/${treeIndex}/${individIndex}`}
         className="fixed top-16"

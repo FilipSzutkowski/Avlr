@@ -9,9 +9,6 @@ const ExpandedUser = ({ onClick }) => {
     >
       <ul>
         <li>
-          <Link to="#">Min Profil</Link>
-        </li>
-        <li>
           <Link to="/mine_stamtavler">Mine stamtavler</Link>
         </li>
         <li className="flex flex-col items-end border-secondaryBrown border-t-1 mt-3">

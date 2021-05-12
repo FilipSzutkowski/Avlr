@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import profilePic from '../assets/profilePic.png';
 import Button from '../utilities/Button';
 import Loading from '../utilities/Loading';
 import LogIn from '../auth/LogIn';
@@ -30,11 +29,7 @@ const UserSection = ({
       <p className="mr-1 text-neutralDarkBrown opacity-70 font-light">
         Hallo, {user.nickname}!
       </p>
-      <img
-        className="w-8 rounded-full shadow-lg border-2 border-primaryGreen"
-        src={profilePic}
-        alt="profile"
-      />
+      <IoPerson className="text-secondaryBrown text-2xl" />
       {isExpanded ? (
         <IoChevronUpCircle className="text-secondaryBrown" />
       ) : (
@@ -42,7 +37,7 @@ const UserSection = ({
       )}
     </Button>
   ) : loading ? (
-    <Loading className="ml-auto"> </Loading>
+    <Loading className="ml-auto" />
   ) : (
     <LogIn className="ml-auto bg-secondaryBrown shadow-logoShadow">
       Logg inn

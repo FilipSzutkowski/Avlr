@@ -68,12 +68,46 @@ app.delete('/deleteTree', checkJwt, async (req, res) => {
   res.status(200).json(familyTrees);
 });
 
+app.delete('/deleteIndividual', checkJwt, async (req, res) => {
+  const treeIndex = req.body.treeIndex;
+  const individIndex = req.body.individIndex;
+  const userId = userIDFromHeader(req.headers.userid);
+  const familyTrees = await TreesService.DeleteIndivid(
+    treeIndex,
+    individIndex,
+    userId
+  );
+
+  if (familyTrees instanceof Error) {
+    res.status(500).json(familyTrees);
+  }
+  res.status(200).json(familyTrees);
+});
+
 app.post('/editTree', checkJwt, async (req, res) => {
   const treeIndex = req.body.treeIndex;
   const familyTree = req.body.tree;
   const userId = userIDFromHeader(req.headers.userid);
   const familyTrees = await TreesService.EditTree(
     familyTree,
+    treeIndex,
+    userId
+  );
+
+  if (familyTrees instanceof Error) {
+    res.status(500).json(familyTrees);
+  }
+  res.status(200).json(familyTrees);
+});
+
+app.post('/editIndivid', checkJwt, async (req, res) => {
+  const treeIndex = req.body.treeIndex;
+  const editedIndivid = req.body.editedIndividual;
+  const individIndex = req.body.individIndex;
+  const userId = userIDFromHeader(req.headers.userid);
+  const familyTrees = await TreesService.EditIndividual(
+    editedIndivid,
+    individIndex,
     treeIndex,
     userId
   );

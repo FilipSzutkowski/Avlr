@@ -2,14 +2,13 @@ import ReactFamilyTree from 'react-family-tree';
 import FamilyNode from './FamilyNode';
 
 const FamilyTree = ({ rootId, nodes, WIDTH, HEIGHT }) => {
-  console.log(nodes);
   return (
     <ReactFamilyTree
-      color="#3a6351"
       nodes={nodes}
       rootId={rootId}
       width={WIDTH}
       height={HEIGHT}
+      className="self-center"
       renderNode={(node) => (
         <FamilyNode
           key={node.id}

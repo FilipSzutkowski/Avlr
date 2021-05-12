@@ -1,7 +1,14 @@
 import { IoAddCircle } from 'react-icons/io5';
 import Button from '../../utilities/Button';
 
-const NewIndividualForm = ({ handleSubmit, handleChange, tree }) => {
+const NewIndividualForm = ({
+  handleSubmit,
+  handleChange,
+  tree,
+  error,
+  editing,
+}) => {
+  const thisIndivid = tree[editing.individIndex];
   return (
     <>
       <form className="py-3 flex flex-col space-y-4" onSubmit={handleSubmit}>
@@ -11,7 +18,9 @@ const NewIndividualForm = ({ handleSubmit, handleChange, tree }) => {
             type="text"
             required={false}
             name="earmark"
-            placeholder="0612"
+            placeholder={
+              editing.status ? thisIndivid.earmark ?? 'Ikke oppgitt' : '0612'
+            }
             onChange={handleChange}
           />
         </label>
@@ -20,8 +29,13 @@ const NewIndividualForm = ({ handleSubmit, handleChange, tree }) => {
           <input
             type="text"
             required={true}
+            maxLength={12}
             name="regNr"
-            placeholder="Din egen identifiseringskode."
+            placeholder={
+              editing.status
+                ? thisIndivid.regNr ?? 'Ikke oppgitt'
+                : 'Din egen måte å identifisere individet på, max 12 tegn.'
+            }
             onChange={handleChange}
           />
           <span className="font-light text-secondaryBrown text-sm">
@@ -91,29 +105,38 @@ const NewIndividualForm = ({ handleSubmit, handleChange, tree }) => {
             onChange={handleChange}
           />
         </label>
-        <label className="flex flex-col mx-2 space-y-4">
-          Far og mor:
-          <select name="father" onChange={handleChange}>
-            <option value="">Far ikke oppgitt.</option>
-            {tree.map((individ) =>
-              individ.gender === 'male' ? (
-                <option key={individ.id} value={individ.id}>
-                  {individ.regNr}
-                </option>
-              ) : null
-            )}
-          </select>
-          <select name="mother" onChange={handleChange}>
-            <option value="">Mor ikke oppgitt.</option>
-            {tree.map((individ) =>
-              individ.gender === 'female' ? (
-                <option key={individ.id} value={individ.id}>
-                  {individ.regNr}
-                </option>
-              ) : null
-            )}
-          </select>
-        </label>
+        {editing.status ? (
+          <p className="mx-2 text-secondaryBrown">
+            Du kan dessverre ikke redigere foreldrene til individet for
+            øyeblikket, beklager! Prøv å slette individet og legge det til på
+            nytt med riktig foreldrene hvis det er tilfellet.
+          </p>
+        ) : (
+          <label className="flex flex-col mx-2 space-y-4">
+            Far og mor:
+            <select name="father" onChange={handleChange}>
+              <option value="">Far ikke oppgitt.</option>
+              {tree.map((individ) =>
+                individ.gender === 'male' ? (
+                  <option key={individ.id} value={individ.id}>
+                    {individ.regNr}
+                  </option>
+                ) : null
+              )}
+            </select>
+            <select name="mother" onChange={handleChange}>
+              <option value="">Mor ikke oppgitt.</option>
+              {tree.map((individ) =>
+                individ.gender === 'female' ? (
+                  <option key={individ.id} value={individ.id}>
+                    {individ.regNr}
+                  </option>
+                ) : null
+              )}
+            </select>
+          </label>
+        )}
+
         <label className="mx-2">
           Felt markert med * må fylles ut. La feltene du ikke vil fylle ut stå
           tomme.
@@ -122,6 +145,11 @@ const NewIndividualForm = ({ handleSubmit, handleChange, tree }) => {
           <IoAddCircle className="text-xl mr-3 text-secondaryBrown bg-backgroundWhite rounded-full" />
           Lagre individet
         </Button>
+        {error && (
+          <p className="text-secondaryBrown">
+            Det oppstod en feil: {error.message}
+          </p>
+        )}
       </form>
     </>
   );

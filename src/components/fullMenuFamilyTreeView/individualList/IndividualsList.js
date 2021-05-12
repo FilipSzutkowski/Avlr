@@ -1,8 +1,26 @@
-import { IoPencil, IoTrash } from 'react-icons/io5';
+import { useState } from 'react';
+import {
+  IoTrash,
+  IoPencil,
+  IoCloseCircle,
+  IoCheckmarkCircle,
+} from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 import Button from '../../utilities/Button';
 import GenderIcon from '../../utilities/GenderIcon';
-const IndividualsList = ({ tree, url, treeIndex }) => {
+const IndividualsList = ({
+  tree,
+  url,
+  treeIndex,
+  handleEdit,
+  handleDelete,
+}) => {
+  const [confirmDelete, setConfirmDelete] = useState({});
+
+  const handleClick = (e) => {
+    const status = confirmDelete[e.currentTarget.id] ? false : true;
+    setConfirmDelete({ [e.currentTarget.id]: status });
+  };
   return tree.length > 0 ? (
     tree.map(({ id, regNr, color, gender }, index) => (
       <section className="group flex hover:bg-secondaryBrown" key={id}>
@@ -21,18 +39,44 @@ const IndividualsList = ({ tree, url, treeIndex }) => {
             {color}
           </dd>
         </Link>
-        <Button
-          className="bg-backgroundWhite shadow-none py-0 my-4 rounded-none group-hover:bg-secondaryBrown menuIcon"
-          title="Rediger stamtavlen"
-        >
-          <IoPencil className="text-xl text-secondaryBrown group-hover:text-backgroundWhite md:text-2xl" />
-        </Button>
-        <Button
-          className="bg-backgroundWhite shadow-none py-0 my-4 rounded-none group-hover:bg-secondaryBrown menuIcon"
-          title="Slett stamtavlen"
-        >
-          <IoTrash className="text-xl text-secondaryBrown group-hover:text-backgroundWhite md:text-2xl" />
-        </Button>
+        {confirmDelete[index] ? (
+          <>
+            <Button
+              className="bg-backgroundWhite shadow-none py-0 my-4 rounded-none group-hover:bg-secondaryBrown menuIcon"
+              title="Bekreft"
+              id={index}
+              onClick={handleDelete}
+            >
+              <IoCheckmarkCircle className="text-xl text-secondaryBrown group-hover:text-backgroundWhite md:text-2xl" />
+            </Button>
+            <Button
+              className="bg-backgroundWhite shadow-none py-0 my-4 rounded-none group-hover:bg-secondaryBrown menuIcon"
+              title="Avbryt"
+              onClick={handleClick}
+            >
+              <IoCloseCircle className="text-xl text-secondaryBrown group-hover:text-backgroundWhite md:text-2xl" />
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button
+              className="bg-backgroundWhite shadow-none py-0 my-4 rounded-none group-hover:bg-secondaryBrown menuIcon"
+              title="Rediger stamtavlen"
+              id={index}
+              onClick={handleEdit}
+            >
+              <IoPencil className="text-xl text-secondaryBrown group-hover:text-backgroundWhite md:text-2xl" />
+            </Button>
+            <Button
+              className="bg-backgroundWhite shadow-none py-0 my-4 rounded-none group-hover:bg-secondaryBrown menuIcon"
+              title="Slett stamtavlen"
+              id={index}
+              onClick={handleClick}
+            >
+              <IoTrash className="text-xl text-secondaryBrown group-hover:text-backgroundWhite md:text-2xl" />
+            </Button>
+          </>
+        )}
       </section>
     ))
   ) : (
